@@ -2,7 +2,6 @@
 
 > An autonomous MERN + Python-agent web application that scans digital footprints for exposed personal data (security breaches & commercial data brokers), autonomously synthesizes enforceable GDPR/CCPA erasure and opt-out demand notices via a LangGraph multi-agent pipeline, enforces human-in-the-loop authorization, and tracks statutory 45-day response deadlines.
 
-Built as a capstone / hackathon MVP.
 
 ---
 
