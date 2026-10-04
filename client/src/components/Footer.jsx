@@ -28,7 +28,7 @@ export const Footer = () => {
             <Link to="/dashboard" className="hover:text-brand-orange transition-colors">Dashboard</Link>
             <Link to="/approvals" className="hover:text-brand-orange transition-colors">Approval Queue</Link>
             <a
-              href="https://github.com/Bhumik-47/FootPrintZero"
+              href="https://github.com/Bhumik-47/SkillTwin"
               target="_blank"
               rel="noreferrer"
               className="hover:text-brand-orange transition-colors flex items-center gap-1"
