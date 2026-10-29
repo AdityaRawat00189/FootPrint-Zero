@@ -50,17 +50,17 @@ export const LandingPage = () => {
               className="lg:col-span-7 flex flex-col items-start"
             >
               <div className="section-badge mb-6">
-                AUTONOMOUS PRIVACY PIPELINE
+                AUTONOMOUS PRIVACY PIPELINE — INDIA (DPDPA 2023) & GLOBAL
               </div>
 
               <h1 className="font-display font-extrabold text-5xl sm:text-7xl lg:text-8xl tracking-tight text-white leading-[1.05]">
                 We Erase <br />
-                Digital Products <br />
+                Digital Footprints <br />
                 That <span className="text-brand-orange">Expose You.</span>
               </h1>
 
               <p className="mt-6 text-base sm:text-lg text-gray-400 font-sans max-w-xl leading-relaxed">
-                An autonomous multi-agent privacy pipeline that scans commercial data broker aggregators, drafts enforceable statutory GDPR & CCPA erasure demands, and tracks compliance until your personal data is purged.
+                India's first autonomous multi-agent privacy pipeline built for the <strong className="text-gray-200">Digital Personal Data Protection Act (DPDPA 2023)</strong> with cross-border support for GDPR & CCPA. We scan commercial aggregators (Truecaller, Justdial, CIBIL, IndiaMART, Apollo.io), synthesize enforceable erasure demands, and track compliance until your personal data is purged.
               </p>
 
               {/* Dual Action Buttons */}
@@ -172,14 +172,15 @@ export const LandingPage = () => {
           <div className="mt-20 pt-8 border-t border-white/5">
             <div className="bg-[#141419] rounded-2xl py-6 px-8 border border-white/5 flex flex-col md:flex-row items-center justify-between gap-6">
               <span className="text-xs font-mono text-gray-400 uppercase tracking-wider text-center md:text-left">
-                Statutory Frameworks & Verification Standards:
+                Statutory Frameworks & Regulatory Bodies:
               </span>
               <div className="flex flex-wrap items-center justify-center gap-8 text-sm font-display font-bold text-gray-400">
-                <span className="hover:text-white transition-colors">CCPA / CPRA</span>
+                <span className="text-brand-orange hover:text-white transition-colors">DPDPA 2023 (India)</span>
+                <span className="hover:text-white transition-colors">Data Protection Board of India (DPBI)</span>
+                <span className="hover:text-white transition-colors">CERT-In Directives</span>
+                <span className="hover:text-white transition-colors">TRAI DND Registry</span>
                 <span className="hover:text-white transition-colors">GDPR Article 17</span>
-                <span className="hover:text-white transition-colors">California SB 362</span>
-                <span className="hover:text-white transition-colors">HIBP Registry</span>
-                <span className="hover:text-white transition-colors">FTC Privacy</span>
+                <span className="hover:text-white transition-colors">CCPA / CPRA</span>
               </div>
             </div>
           </div>

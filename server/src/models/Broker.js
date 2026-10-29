@@ -65,7 +65,7 @@ const brokerSchema = new mongoose.Schema(
     ],
     jurisdictionsSupported: {
       type: [String],
-      default: ['CCPA', 'GDPR'],
+      default: ['DPDPA', 'CCPA', 'GDPR'],
     },
     instructions: {
       type: String,

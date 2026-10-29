@@ -1,4 +1,67 @@
 LEGAL_KNOWLEDGE_BASE = [
+    # --- INDIA: DIGITAL PERSONAL DATA PROTECTION ACT, 2023 (DPDPA 2023) ---
+    {
+        "id": "dpdpa_sec12_erasure",
+        "framework": "DPDPA",
+        "title": "DPDPA 2023 Section 12(1) & (3) - Right to Erasure of Personal Data",
+        "content": (
+            "Under Section 12 of the Digital Personal Data Protection Act, 2023 (Act No. 22 of 2023), "
+            "a Data Principal has the statutory right to the erasure of their personal data. As the Data Fiduciary "
+            "or commercial Data Processor, you are legally mandated to erase all personal data, contact identifiers, "
+            "financial profiles, and behavioral metadata concerning me that are no longer necessary for the purpose "
+            "for which they were processed, and direct all downstream Data Processors to permanently purge the same."
+        ),
+        "tags": ["dpdpa", "section_12", "erasure", "india", "data_principal", "right_to_be_forgotten"]
+    },
+    {
+        "id": "dpdpa_sec6_consent_revocation",
+        "framework": "DPDPA",
+        "title": "DPDPA 2023 Section 6(4) - Revocation of Processing Consent",
+        "content": (
+            "Pursuant to Section 6(4) of the Digital Personal Data Protection Act, 2023, I hereby exercise my "
+            "unconditional right to withdraw all consent previously granted for the processing, collection, profiling, "
+            "commercial indexing, or transmission of my personal data. Upon receipt of this notice, all processing "
+            "by you and your downstream partners must immediately cease."
+        ),
+        "tags": ["dpdpa", "section_6", "consent", "revocation", "opt_out", "india"]
+    },
+    {
+        "id": "dpdpa_sec13_grievance_sla",
+        "framework": "DPDPA",
+        "title": "DPDPA 2023 Section 13 - Mandatory Grievance Redressal & 30-Day SLA",
+        "content": (
+            "Under Section 13 of the DPDPA 2023, your designated Data Protection Officer / Grievance Redressal Officer "
+            "is required to acknowledge this request and provide confirmation of completed erasure within thirty (30) "
+            "calendar days. Failure to resolve this statutory demand will result in immediate complaint escalation "
+            "to the Data Protection Board of India (DPBI)."
+        ),
+        "tags": ["dpdpa", "section_13", "grievance", "dpo", "dpbi", "deadline", "sla"]
+    },
+    {
+        "id": "dpdpa_sec33_penalties",
+        "framework": "DPDPA",
+        "title": "DPDPA 2023 Section 33 & Schedule - Regulatory Fines up to ₹250 Crores",
+        "content": (
+            "Notice is hereby given that under Section 33 read with the Schedule of the DPDPA 2023, failure to implement "
+            "adequate security safeguards or intentional non-compliance with Data Principal erasure and privacy rights "
+            "empowers the Data Protection Board of India (DPBI) to impose financial penalties of up to INR 250 Crores "
+            "(₹2,500,000,000)."
+        ),
+        "tags": ["dpdpa", "penalties", "dpbi", "enforcement", "fine"]
+    },
+    {
+        "id": "trai_tcccpr_dnd",
+        "framework": "DPDPA",
+        "title": "TRAI TCCCPR Regulations - National Do Not Disturb (DND) Suppression",
+        "content": (
+            "In accordance with the Telecom Regulatory Authority of India (TRAI) Telecom Commercial Communications "
+            "Customer Preference Regulations (TCCCPR), my registered telephone number must be scrubbed from all commercial "
+            "telemarketing lists, outbound dialer datasets, and lead distribution networks."
+        ),
+        "tags": ["trai", "dnd", "telemarketing", "suppression", "india", "mobile"]
+    },
+
+    # --- USA: CALIFORNIA CONSUMER PRIVACY ACT (CCPA / CPRA / SB 362) ---
     {
         "id": "ccpa_1798_105_deletion",
         "framework": "CCPA",
@@ -44,6 +107,8 @@ LEGAL_KNOWLEDGE_BASE = [
         ),
         "tags": ["data_broker", "registry", "sb362", "delete_act"]
     },
+
+    # --- EUROPEAN UNION: GENERAL DATA PROTECTION REGULATION (GDPR) ---
     {
         "id": "gdpr_art17_erasure",
         "framework": "GDPR",

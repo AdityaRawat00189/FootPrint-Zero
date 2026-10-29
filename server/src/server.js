@@ -1,6 +1,7 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import mongoose from 'mongoose';
 import { connectDB } from './config/db.js';
 import authRoutes from './routes/authRoutes.js';
 import exposureRoutes from './routes/exposureRoutes.js';
@@ -8,7 +9,13 @@ import caseRoutes from './routes/caseRoutes.js';
 import brokerRoutes from './routes/brokerRoutes.js';
 import { initFollowupCron } from './services/cronService.js';
 
-dotenv.config();
+process.on('unhandledRejection', (reason) => {
+  console.error('[ServerError] Unhandled Promise Rejection:', reason);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('[ServerError] Uncaught Exception:', err);
+});
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,6 +32,18 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json());
+
+// Database readiness check middleware for API requests (excluding health check)
+app.use('/api', (req, res, next) => {
+  if (req.path === '/health') return next();
+  if (mongoose.connection.readyState !== 1) {
+    return res.status(503).json({
+      success: false,
+      message: 'Database is connecting or unreachable. In MongoDB Atlas, verify your IP is whitelisted under Network Access (0.0.0.0/0).',
+    });
+  }
+  next();
+});
 
 // Routes
 app.use('/api/auth', authRoutes);
@@ -58,3 +77,4 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`[FootprintZero Server] Listening on port ${PORT}`);
 });
+

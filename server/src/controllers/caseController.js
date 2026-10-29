@@ -34,11 +34,19 @@ export const startCase = async (req, res) => {
     const broker = exposure.brokerId || (await Broker.findOne({ name: exposure.sourceName }));
     const brokerName = broker ? broker.name : exposure.sourceName;
     const brokerEmail = broker ? broker.contactEmail : `privacy@${exposure.sourceName.toLowerCase().replace(/\s+/g, '')}.com`;
-    const legalFramework = (user.country === 'US' && user.state === 'CA') ? 'CCPA' : (user.country !== 'US' ? 'GDPR' : 'CCPA');
+    const userCountry = (user.country || 'IN').toUpperCase();
+    let legalFramework = 'DPDPA';
+    if (userCountry === 'US') {
+      legalFramework = 'CCPA';
+    } else if (['GB', 'DE', 'FR', 'IT', 'ES', 'NL', 'EU'].includes(userCountry)) {
+      legalFramework = 'GDPR';
+    } else {
+      legalFramework = 'DPDPA';
+    }
 
     const caseNumber = generateCaseNumber();
 
-    console.log(`[CaseController] Launching LangGraph pipeline for case ${caseNumber} (${brokerName})`);
+    console.log(`[CaseController] Launching LangGraph pipeline for case ${caseNumber} (${brokerName}) under ${legalFramework}`);
 
     // Invoke Python LangGraph pipeline
     const pipelineRes = await agentServiceClient.startCasePipeline({
@@ -47,7 +55,8 @@ export const startCase = async (req, res) => {
       userName: user.name,
       userEmail: user.email,
       userPhone: user.phone || '',
-      userState: user.state || 'CA',
+      userState: user.state || 'DL',
+      userCountry: userCountry,
       brokerId: broker ? broker._id.toString() : '',
       brokerName,
       brokerEmail,
@@ -56,16 +65,27 @@ export const startCase = async (req, res) => {
       exposedCategories: exposure.exposedDataCategories || [],
     });
 
-    let draftedLetter = {
-      subject: `FORMAL NOTICE: Consumer Personal Data Erasure & Opt-Out Request (${legalFramework}) - ${user.name}`,
-      body: `DATE: ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}\nTO: Privacy Compliance Team, ${brokerName} <${brokerEmail}>\nFROM: ${user.name} <${user.email}>\n\nSUBJECT: FORMAL DEMAND FOR PERMANENT PERSONAL DATA ERASURE AND DO-NOT-SELL/SHARE DIRECTIVE UNDER ${legalFramework}\n\nPursuant to statutory privacy provisions under ${legalFramework} (Cal. Civ. Code § 1798.105 / GDPR Art. 17), I hereby demand immediate permanent erasure of all personal data, contact records, and profiling identifiers associated with ${user.email} from your commercial databases and downstream partner networks.\n\nStatutory compliance window: 45 calendar days.\n\nSincerely,\n${user.name}`,
-      legalClausesUsed: [
-        `${legalFramework} Mandatory Deletion & Opt-Out Clause`,
-        `${legalFramework} Downstream Vendor Propagation Mandate`,
-        `${legalFramework} 45-Day Statutory Compliance SLA`,
-      ],
-      draftedAt: new Date(),
-    };
+    let draftedLetter = legalFramework === 'DPDPA'
+      ? {
+          subject: `FORMAL NOTICE: Statutory Data Erasure & Consent Revocation (DPDPA 2023) - ${user.name}`,
+          body: `DATE: ${new Date().toLocaleDateString('en-IN', { month: 'long', day: 'numeric', year: 'numeric' })}\nTO: Data Protection / Grievance Officer, ${brokerName} <${brokerEmail}>\nFROM: ${user.name} <${user.email}>\nLOCATION: ${user.state || 'Delhi'}, India\n\nSUBJECT: FORMAL DEMAND FOR PERMANENT PERSONAL DATA ERASURE UNDER DIGITAL PERSONAL DATA PROTECTION ACT, 2023\n\nPursuant to Section 12(1) and Section 12(3) of the Digital Personal Data Protection Act, 2023 (Act No. 22 of 2023) read with Section 6(4), I hereby formally demand the immediate and permanent erasure of all personal data, contact identifiers, and profiling records associated with ${user.email} from your databases and all downstream processing partners.\n\nStatutory compliance window: 30 calendar days.\n\nSincerely,\n${user.name}\nData Principal (India)`,
+          legalClausesUsed: [
+            'DPDPA 2023 Section 12 - Right to Correction & Erasure',
+            'DPDPA 2023 Section 6(4) - Revocation of Processing Consent',
+            'DPDPA 2023 Section 13 - Mandatory Grievance Redressal SLA',
+          ],
+          draftedAt: new Date(),
+        }
+      : {
+          subject: `FORMAL NOTICE: Consumer Personal Data Erasure & Opt-Out Request (${legalFramework}) - ${user.name}`,
+          body: `DATE: ${new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}\nTO: Privacy Compliance Team, ${brokerName} <${brokerEmail}>\nFROM: ${user.name} <${user.email}>\n\nSUBJECT: FORMAL DEMAND FOR PERMANENT PERSONAL DATA ERASURE AND DO-NOT-SELL/SHARE DIRECTIVE UNDER ${legalFramework}\n\nPursuant to statutory privacy provisions under ${legalFramework} (Cal. Civ. Code § 1798.105 / GDPR Art. 17), I hereby demand immediate permanent erasure of all personal data, contact records, and profiling identifiers associated with ${user.email} from your commercial databases and downstream partner networks.\n\nStatutory compliance window: 45 calendar days.\n\nSincerely,\n${user.name}`,
+          legalClausesUsed: [
+            `${legalFramework} Mandatory Deletion & Opt-Out Clause`,
+            `${legalFramework} Downstream Vendor Propagation Mandate`,
+            `${legalFramework} Statutory Compliance SLA`,
+          ],
+          draftedAt: new Date(),
+        };
 
     let agentTrail = [
       {
@@ -230,7 +250,8 @@ export const handleApprovalAction = async (req, res) => {
 
       const sentAt = new Date();
       const deadline = new Date();
-      deadline.setDate(deadline.getDate() + 45); // 45 days SLA
+      const slaDays = caseRecord.legalFramework === 'DPDPA' ? 30 : 45;
+      deadline.setDate(deadline.getDate() + slaDays);
 
       caseRecord.responseDeadline = deadline;
       caseRecord.dispatchMetadata = {
@@ -255,7 +276,7 @@ export const handleApprovalAction = async (req, res) => {
           title: 'Legal Notice Dispatched',
           agentName: 'Executor Agent',
           status: 'completed',
-          message: `Notice transmitted to ${caseRecord.targetEntityName} (${caseRecord.targetEntityEmail}). 45-day SLA active (Deadline: ${deadline.toLocaleDateString()}).`,
+          message: `Notice transmitted to ${caseRecord.targetEntityName} (${caseRecord.targetEntityEmail}). Statutory ${slaDays}-day SLA active (Deadline: ${deadline.toLocaleDateString()}).`,
           details: caseRecord.dispatchMetadata,
           timestamp: new Date(),
         }

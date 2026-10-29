@@ -7,6 +7,34 @@ logger = logging.getLogger("FootprintZero.HIBPTool")
 
 REALISTIC_MOCK_BREACHES = [
   {
+    "Name": "BigBasket",
+    "Title": "BigBasket India Customer Records",
+    "Domain": "bigbasket.com",
+    "BreachDate": "2020-11-07",
+    "PwnCount": 20000000,
+    "Description": "In late 2020, personal records of 20M+ Indian consumers were exposed on underground forums, containing names, email addresses, password hashes, phone numbers, and physical addresses.",
+    "DataClasses": ["Email addresses", "Names", "Phone numbers", "Physical addresses", "Passwords", "Dates of birth"],
+    "IsVerified": True,
+    "IsFabricated": False,
+    "IsSensitive": True,
+    "IsRetired": False,
+    "IsSpamList": False
+  },
+  {
+    "Name": "DominosIndia",
+    "Title": "Domino's Pizza India Order Logs",
+    "Domain": "dominos.co.in",
+    "BreachDate": "2021-05-22",
+    "PwnCount": 180000000,
+    "Description": "In May 2021, an unauthorized actor published delivery order histories of 180M Indian consumers including phone numbers, physical addresses, and order payment methods.",
+    "DataClasses": ["Phone numbers", "Physical addresses", "Names", "Geographic locations", "Email addresses"],
+    "IsVerified": True,
+    "IsFabricated": False,
+    "IsSensitive": False,
+    "IsRetired": False,
+    "IsSpamList": False
+  },
+  {
     "Name": "Apollo",
     "Title": "Apollo.io Database Exposure",
     "Domain": "apollo.io",
@@ -31,20 +59,6 @@ REALISTIC_MOCK_BREACHES = [
     "IsVerified": True,
     "IsFabricated": False,
     "IsSensitive": False,
-    "IsRetired": False,
-    "IsSpamList": False
-  },
-  {
-    "Name": "VerificationsIO",
-    "Title": "Verifications.io Enterprise Exposure",
-    "Domain": "verifications.io",
-    "BreachDate": "2021-02-25",
-    "PwnCount": 763000000,
-    "Description": "Enterprise email validation service exposed records including email addresses, names, phone numbers, IP addresses, and credit score estimates.",
-    "DataClasses": ["Email addresses", "Names", "Phone numbers", "IP addresses", "Credit rating indicators", "Dates of birth"],
-    "IsVerified": True,
-    "IsFabricated": False,
-    "IsSensitive": True,
     "IsRetired": False,
     "IsSpamList": False
   }

@@ -13,7 +13,7 @@ export const AuthPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState(searchParams.get('email') || '');
   const [password, setPassword] = useState('');
-  const [state, setState] = useState('CA');
+  const [state, setState] = useState('DL');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -195,20 +195,32 @@ export const AuthPage = () => {
                   onChange={(e) => setState(e.target.value)}
                   className="w-full bg-transparent text-xs font-mono text-white focus:outline-none"
                 >
+                  <option value="DL" className="bg-[#141419] text-white">
+                    India — Delhi / NCR (DPDPA 2023 / DPBI)
+                  </option>
+                  <option value="MH" className="bg-[#141419] text-white">
+                    India — Maharashtra / Mumbai (DPDPA 2023)
+                  </option>
+                  <option value="KA" className="bg-[#141419] text-white">
+                    India — Karnataka / Bengaluru (DPDPA 2023)
+                  </option>
+                  <option value="TN" className="bg-[#141419] text-white">
+                    India — Tamil Nadu / Chennai (DPDPA 2023)
+                  </option>
+                  <option value="UP" className="bg-[#141419] text-white">
+                    India — Uttar Pradesh / Noida (DPDPA 2023)
+                  </option>
+                  <option value="IN-OTHER" className="bg-[#141419] text-white">
+                    India — All Other States & UTs (DPDPA 2023)
+                  </option>
                   <option value="CA" className="bg-[#141419] text-white">
-                    California (CCPA / CPRA Mandate)
-                  </option>
-                  <option value="NY" className="bg-[#141419] text-white">
-                    New York (SHIELD / State Standards)
-                  </option>
-                  <option value="TX" className="bg-[#141419] text-white">
-                    Texas (TDPSA)
+                    United States — California (CCPA / CPRA / SB 362)
                   </option>
                   <option value="EU" className="bg-[#141419] text-white">
-                    European Union / UK (GDPR Art. 17)
+                    European Union / UK (GDPR Article 17)
                   </option>
-                  <option value="OTHER" className="bg-[#141419] text-white">
-                    Other US State / Global
+                  <option value="GLOBAL" className="bg-[#141419] text-white">
+                    Other Global / International
                   </option>
                 </select>
               </div>

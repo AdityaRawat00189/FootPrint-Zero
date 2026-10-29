@@ -11,64 +11,97 @@ def get_mongo_client():
     from pymongo import MongoClient
     return MongoClient(mongo_uri)
 
-def query_relevant_brokers(user_state: str = "CA", user_country: str = "US") -> List[Dict[str, Any]]:
+def query_relevant_brokers(user_state: str = "DL", user_country: str = "IN") -> List[Dict[str, Any]]:
     """
-    Finds active data brokers matching the user's jurisdiction and high-risk aggregation criteria.
+    Finds active data brokers matching the user's jurisdiction (DPDPA for India, CCPA for US, GDPR for EU).
     """
     try:
         client = get_mongo_client()
         db = client.get_database("footprintzero")
         collection = db["brokers"]
         
-        # Determine jurisdiction query
-        jurisdiction = "CCPA" if (user_country == "US" and (user_state == "CA" or user_state)) else "GDPR"
+        country = (user_country or "IN").upper()
+        if country in ["IN", "INDIA"]:
+            jurisdiction = "DPDPA"
+        elif country == "US":
+            jurisdiction = "CCPA"
+        else:
+            jurisdiction = "GDPR"
         
         query = {
             "verified": True,
             "jurisdictionsSupported": jurisdiction
         }
         
-        cursor = collection.find(query).limit(10)
+        cursor = collection.find(query).limit(12)
         brokers = []
         for doc in cursor:
             doc["_id"] = str(doc["_id"])
             brokers.append(doc)
             
         client.close()
-        logger.info(f"Retrieved {len(brokers)} matching data brokers for jurisdiction {jurisdiction}")
-        return brokers
+        if brokers:
+            logger.info(f"Retrieved {len(brokers)} matching data brokers for jurisdiction {jurisdiction}")
+            return brokers
     except Exception as e:
         logger.error(f"Error querying brokers collection: {str(e)}")
-        # Fallback to in-memory defaults if DB query experiences momentary interruption
-        return [
-            {
-                "_id": "mock_acxiom_1",
-                "name": "Acxiom LLC",
-                "domain": "acxiom.com",
-                "category": "Marketing & AdTech",
-                "contactEmail": "privacy@acxiom.com",
-                "dataTypesCollected": ["name", "address", "phone", "email", "demographics"],
-                "jurisdictionsSupported": ["CCPA", "GDPR"],
-                "responseSlaDays": 45
-            },
-            {
-                "_id": "mock_whitepages_2",
-                "name": "Whitepages Inc.",
-                "domain": "whitepages.com",
-                "category": "People Search",
-                "contactEmail": "privacy@whitepages.com",
-                "dataTypesCollected": ["name", "address_history", "phone", "relatives"],
-                "jurisdictionsSupported": ["CCPA", "GDPR"],
-                "responseSlaDays": 30
-            },
-            {
-                "_id": "mock_apollo_3",
-                "name": "Apollo.io (ZenProspect)",
-                "domain": "apollo.io",
-                "category": "B2B & Sales Intelligence",
-                "contactEmail": "privacy@apollo.io",
-                "dataTypesCollected": ["work_email", "phone", "job_title", "company"],
-                "jurisdictionsSupported": ["CCPA", "GDPR"],
-                "responseSlaDays": 30
-            }
-        ]
+        
+    # High-quality in-memory defaults for India + Global platforms used in India
+    logger.info("Using India & Global aggregator fallback dataset.")
+    return [
+        {
+            "_id": "mock_truecaller_1",
+            "name": "Truecaller India",
+            "domain": "truecaller.com",
+            "category": "People Search",
+            "contactEmail": "privacy@truecaller.com",
+            "dataTypesCollected": ["name", "phone", "email", "address_tags", "contacts"],
+            "jurisdictionsSupported": ["DPDPA", "GDPR", "CCPA"],
+            "removalDifficulty": "easy",
+            "responseSlaDays": 30
+        },
+        {
+            "_id": "mock_justdial_2",
+            "name": "Justdial Limited",
+            "domain": "justdial.com",
+            "category": "People Search",
+            "contactEmail": "grievance@justdial.com",
+            "dataTypesCollected": ["name", "phone", "address", "business_name", "location"],
+            "jurisdictionsSupported": ["DPDPA"],
+            "removalDifficulty": "medium",
+            "responseSlaDays": 30
+        },
+        {
+            "_id": "mock_cibil_3",
+            "name": "TransUnion CIBIL Limited",
+            "domain": "transunioncibil.com",
+            "category": "Financial & Credit",
+            "contactEmail": "nodalofficer@transunioncibil.com",
+            "dataTypesCollected": ["name", "pan", "phone", "address_history", "cibil_score"],
+            "jurisdictionsSupported": ["DPDPA"],
+            "removalDifficulty": "hard",
+            "responseSlaDays": 30
+        },
+        {
+            "_id": "mock_apollo_4",
+            "name": "Apollo.io (ZenProspect)",
+            "domain": "apollo.io",
+            "category": "B2B & Sales Intelligence",
+            "contactEmail": "privacy@apollo.io",
+            "dataTypesCollected": ["work_email", "phone", "job_title", "company"],
+            "jurisdictionsSupported": ["DPDPA", "CCPA", "GDPR"],
+            "removalDifficulty": "easy",
+            "responseSlaDays": 30
+        },
+        {
+            "_id": "mock_naukri_5",
+            "name": "Naukri / Info Edge India",
+            "domain": "naukri.com",
+            "category": "B2B & Sales Intelligence",
+            "contactEmail": "privacy@infoedge.in",
+            "dataTypesCollected": ["name", "resume_data", "phone", "work_histories", "salary"],
+            "jurisdictionsSupported": ["DPDPA"],
+            "removalDifficulty": "medium",
+            "responseSlaDays": 30
+        }
+    ]

@@ -27,7 +27,17 @@ const seedBrokers = async () => {
     }
 
     console.log('[Seeder] Connecting to MongoDB...');
-    await mongoose.connect(mongoUri);
+    try {
+      await mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 5000 });
+    } catch (err) {
+      console.log('[Seeder] Retrying with Google/Cloudflare public DNS (8.8.8.8, 1.1.1.1)...');
+      try {
+        dns.setServers(['8.8.8.8', '1.1.1.1']);
+        await mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 5000 });
+      } catch (dnsErr) {
+        throw new Error(`MongoDB connection failed: ${dnsErr.message}`);
+      }
+    }
     console.log('[Seeder] Connected successfully.');
 
     // Read seed json

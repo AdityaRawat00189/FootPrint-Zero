@@ -31,12 +31,12 @@ const userSchema = new mongoose.Schema(
     },
     state: {
       type: String,
-      default: 'CA', // Default jurisdiction reference (e.g., CA for CCPA, or other state / EU for GDPR)
+      default: 'DL', // Default Indian State (e.g., DL for Delhi, MH for Maharashtra, KA for Karnataka, or CA/EU)
       trim: true,
     },
     country: {
       type: String,
-      default: 'US',
+      default: 'IN', // Default to India (DPDPA 2023)
       trim: true,
     },
     preferences: {

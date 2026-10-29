@@ -40,11 +40,11 @@ class LegalRAGStore:
             logger.warning(f"ChromaDB local initialization note: {str(e)}. Direct RAG fallback enabled.")
             self.collection = None
 
-    def retrieve_clauses(self, framework: str = "CCPA", query: str = "deletion opt out broker", top_k: int = 3) -> List[Dict[str, str]]:
+    def retrieve_clauses(self, framework: str = "DPDPA", query: str = "deletion opt out broker", top_k: int = 3) -> List[Dict[str, str]]:
         """
-        Retrieves top relevant statutory clauses for the target jurisdiction.
+        Retrieves top relevant statutory clauses for the target jurisdiction (DPDPA, CCPA, GDPR).
         """
-        framework = framework.upper() if framework else "CCPA"
+        framework = framework.upper() if framework else "DPDPA"
         
         # Try ChromaDB query first
         if self.collection:
@@ -70,7 +70,8 @@ class LegalRAGStore:
             if doc["framework"] == framework
         ]
         return matched[:top_k] if matched else [
-            {"title": "CCPA Cal. Civ. Code § 1798.105", "content": LEGAL_KNOWLEDGE_BASE[0]["content"]}
+            {"title": doc["title"], "content": doc["content"]}
+            for doc in LEGAL_KNOWLEDGE_BASE[:top_k]
         ]
 
 _rag_store_instance = None

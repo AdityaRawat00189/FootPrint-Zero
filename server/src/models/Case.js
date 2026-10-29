@@ -113,8 +113,8 @@ const caseSchema = new mongoose.Schema(
     },
     legalFramework: {
       type: String,
-      enum: ['CCPA', 'GDPR', 'VCDPA', 'CPA', 'OTHER'],
-      default: 'CCPA',
+      enum: ['DPDPA', 'CCPA', 'GDPR', 'VCDPA', 'CPA', 'OTHER'],
+      default: 'DPDPA',
     },
     status: {
       type: String,

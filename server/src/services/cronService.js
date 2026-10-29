@@ -40,8 +40,11 @@ export const initFollowupCron = () => {
         caseRecord.lastFollowupAt = now;
         caseRecord.status = 'escalated';
         
+        const isIndia = caseRecord.legalFramework === 'DPDPA';
         const escalationSubject = `URGENT STATUTORY ESCALATION: Non-Compliance Notice - Case ${caseRecord.caseNumber} (${caseRecord.legalFramework})`;
-        const escalationBody = `DATE: ${now.toLocaleDateString()}\nTO: Legal Compliance, ${caseRecord.targetEntityName}\nFROM: ${user.name} <${user.email}>\nRE: NON-COMPLIANCE ESCALATION (Ref: ${caseRecord.caseNumber})\n\nMandatory statutory compliance window exceeded. Administrative complaint queued for CPPA / FTC review.`;
+        const escalationBody = isIndia
+          ? `DATE: ${now.toLocaleDateString('en-IN')}\nTO: Data Protection / Grievance Officer, ${caseRecord.targetEntityName}\nFROM: ${user.name} <${user.email}>\nRE: STATUTORY NON-COMPLIANCE ESCALATION (Ref: ${caseRecord.caseNumber})\n\nMandatory 30-day compliance window exceeded under Section 12 & Section 13 of the Digital Personal Data Protection Act, 2023 (DPDPA 2023).\n\nNOTICE OF REGULATORY FILING: Unless full proof of data erasure is delivered to ${user.email} within five (5) business days, formal administrative proceedings will be initiated directly with the Data Protection Board of India (DPBI) under Section 33 (penalties up to ₹250 Crores) and CERT-In.`
+          : `DATE: ${now.toLocaleDateString()}\nTO: Legal Compliance, ${caseRecord.targetEntityName}\nFROM: ${user.name} <${user.email}>\nRE: NON-COMPLIANCE ESCALATION (Ref: ${caseRecord.caseNumber})\n\nMandatory statutory compliance window exceeded. Administrative complaint queued for CPPA / FTC / DPA review.`;
 
         caseRecord.escalationLetter = {
           subject: escalationSubject,
@@ -55,7 +58,9 @@ export const initFollowupCron = () => {
           title: `Automated Follow-up #${followupCount}: Statutory Escalation Dispatched`,
           agentName: 'Follow-up Agent (Cron)',
           status: 'completed',
-          message: `Statutory 45-day deadline elapsed without deletion confirmation. Dispatched escalation notice #${followupCount} to ${caseRecord.targetEntityName}.`,
+          message: isIndia
+            ? `Statutory 30-day DPDPA response window elapsed. Dispatched formal regulatory escalation notice citing Data Protection Board of India (DPBI) enforcement to ${caseRecord.targetEntityName}.`
+            : `Statutory 45-day deadline elapsed without deletion confirmation. Dispatched escalation notice #${followupCount} to ${caseRecord.targetEntityName}.`,
           timestamp: now,
         });
 
