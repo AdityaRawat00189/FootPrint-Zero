@@ -81,11 +81,11 @@ export const DraftLetterPreview = ({
                 value={customBody}
                 onChange={(e) => setCustomBody(e.target.value)}
                 rows={16}
-                className="w-full bg-[#111115] border border-brand-orange/40 rounded-2xl p-5 text-xs font-mono text-gray-200 focus:outline-none focus:ring-1 focus:ring-brand-orange leading-relaxed"
+                className="w-full bg-[#141624] border border-brand-orange/40 rounded-2xl p-5 text-xs font-mono text-gray-200 focus:outline-none focus:ring-1 focus:ring-brand-orange leading-relaxed shadow-inner"
               />
             </div>
           ) : (
-            <div className="bg-[#111115] border border-white/5 rounded-2xl p-5 max-h-[400px] overflow-y-auto font-mono text-xs text-gray-300 leading-relaxed whitespace-pre-wrap selection:bg-brand-orange/30">
+            <div className="bg-[#141624] border border-white/10 rounded-2xl p-5 max-h-[400px] overflow-y-auto font-mono text-xs text-gray-200 leading-relaxed whitespace-pre-wrap selection:bg-brand-orange/30 shadow-inner">
               {customBody || originalBody}
             </div>
           )}
@@ -120,7 +120,7 @@ export const DraftLetterPreview = ({
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-[#18181E] p-8 rounded-3xl max-w-md w-full border border-white/10 shadow-2xl"
+            className="bg-[#1C1E2D] p-8 rounded-3xl max-w-md w-full border border-white/15 shadow-2xl"
           >
             <div className="section-badge mb-2">
               AGENT FEEDBACK
@@ -129,14 +129,14 @@ export const DraftLetterPreview = ({
               Request Agent Revision
             </h4>
             <p className="text-xs text-gray-400 mb-4 leading-relaxed">
-              Specify instructions for the Legal Drafting Agent (e.g. adjust statutory citations, demand immediate phone suppression, or cite CPPA enforcement penalties).
+              Specify instructions for the Legal Drafting Agent (e.g. adjust statutory citations, demand immediate phone suppression, or cite DPBI/CPPA enforcement penalties).
             </p>
             <textarea
               value={revisionFeedback}
               onChange={(e) => setRevisionFeedback(e.target.value)}
-              placeholder="e.g., Emphasize SB 362 continuous 45-day deletion requirements and CCPA § 1798.199 fines..."
+              placeholder="e.g., Emphasize DPDPA 2023 Section 12 continuous 30-day erasure mandate and DPBI Section 33 penalties..."
               rows={4}
-              className="w-full bg-[#111115] border border-white/10 rounded-2xl p-4 text-xs font-mono text-gray-200 focus:outline-none focus:border-brand-orange mb-5"
+              className="w-full bg-[#141624] border border-white/10 rounded-2xl p-4 text-xs font-mono text-gray-200 focus:outline-none focus:border-brand-orange mb-5 shadow-inner"
             />
             <div className="flex items-center justify-end gap-3">
               <button

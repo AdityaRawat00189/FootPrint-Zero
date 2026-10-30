@@ -96,7 +96,7 @@ export const ApprovalQueuePage = () => {
   const selectedCase = approvals.find((a) => a._id === selectedCaseId) || approvals[0];
 
   return (
-    <div className="min-h-screen pb-24 bg-[#0D0D11] text-gray-100 selection:bg-brand-orange/30">
+    <div className="min-h-screen pb-24 bg-bg-base text-gray-100 selection:bg-brand-orange/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
@@ -113,7 +113,7 @@ export const ApprovalQueuePage = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono px-4 py-2 rounded-full bg-[#18181E] border border-white/10 text-brand-orange font-bold">
+            <span className="text-xs font-mono px-4 py-2 rounded-full bg-[#1C1E2D] border border-white/10 text-brand-orange font-bold shadow-sm">
               {approvals.length} {approvals.length === 1 ? 'Notice' : 'Notices'} Pending Review
             </span>
           </div>
@@ -181,8 +181,8 @@ export const ApprovalQueuePage = () => {
                     whileHover={{ x: 3 }}
                     className={`p-5 rounded-3xl cursor-pointer border transition-all ${
                       isSelected
-                        ? 'bg-[#1C1C24] border-2 border-brand-orange shadow-glow-orange-sm'
-                        : 'bg-[#141419] border-white/5 hover:border-white/20'
+                        ? 'bg-[#24273A] border-2 border-brand-orange shadow-glow-orange-sm'
+                        : 'bg-[#1C1E2D] border-white/10 hover:border-white/20'
                     }`}
                   >
                     <div className="flex items-center justify-between">

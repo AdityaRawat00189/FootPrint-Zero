@@ -92,7 +92,7 @@ export const CaseTrackerPage = () => {
   const daysRemaining = deadline ? Math.max(0, Math.ceil((deadline - now) / (1000 * 60 * 60 * 24))) : 45;
 
   return (
-    <div className="min-h-screen pb-24 bg-[#0D0D11] text-gray-100 selection:bg-brand-orange/30">
+    <div className="min-h-screen pb-24 bg-bg-base text-gray-100 selection:bg-brand-orange/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         {/* Back Link & Breadcrumb */}
         <div className="flex items-center gap-2 mb-6">
@@ -130,7 +130,7 @@ export const CaseTrackerPage = () => {
           </div>
 
           {/* SLA Countdown Card */}
-          <div className="bg-[#111115] border border-white/10 p-5 rounded-3xl flex items-center gap-4 min-w-[240px] relative z-10 shadow-lg">
+          <div className="bg-[#141624] border border-white/10 p-5 rounded-3xl flex items-center gap-4 min-w-[240px] relative z-10 shadow-lg">
             <div className="w-12 h-12 rounded-2xl bg-brand-orange/15 text-brand-orange border border-brand-orange/30 flex items-center justify-center">
               <Clock className="w-6 h-6" />
             </div>
@@ -202,7 +202,7 @@ export const CaseTrackerPage = () => {
                 {(caseRecord.correspondence || []).map((msg, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-2xl bg-[#111115] border border-white/5 text-xs font-mono"
+                    className="p-4 rounded-2xl bg-[#141624] border border-white/10 text-xs font-mono shadow-inner"
                   >
                     <div className="flex items-center justify-between text-[10px] text-gray-400 pb-2 border-b border-white/5 mb-2.5">
                       <span className="text-brand-orange uppercase font-bold">
@@ -251,7 +251,7 @@ export const CaseTrackerPage = () => {
                 </span>
               </div>
 
-              <div className="mt-5 bg-[#111115] border border-white/5 rounded-2xl p-5 max-h-[380px] overflow-y-auto font-mono text-xs text-gray-300 whitespace-pre-wrap leading-relaxed selection:bg-brand-orange/30">
+              <div className="mt-5 bg-[#141624] border border-white/10 rounded-2xl p-5 max-h-[380px] overflow-y-auto font-mono text-xs text-gray-200 whitespace-pre-wrap leading-relaxed selection:bg-brand-orange/30 shadow-inner">
                 {caseRecord.draftedLetter?.userEditedBody || caseRecord.draftedLetter?.body || 'No letter drafted.'}
               </div>
             </div>

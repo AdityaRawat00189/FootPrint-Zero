@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Shield, CheckSquare, Layers, LogOut, User, ArrowRight } from 'lucide-react';
+import { Shield, CheckSquare, Layers, LogOut, User, ArrowRight, Terminal } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { StatutoryTelemetryModal } from './StatutoryTelemetryModal';
 
 export const Navbar = ({ pendingApprovalCount = 0 }) => {
   const { user, isAuthenticated, logout } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const [showTelemetryModal, setShowTelemetryModal] = useState(false);
 
   const navLinks = [
     { path: '/dashboard', label: 'Dashboard', icon: Layers },
@@ -19,7 +21,8 @@ export const Navbar = ({ pendingApprovalCount = 0 }) => {
   ];
 
   return (
-    <nav className="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#0D0D11]/90 border-b border-white/5 transition-all">
+    <>
+      <nav className="sticky top-0 z-40 w-full backdrop-blur-xl bg-[#141622]/85 border-b border-white/10 shadow-sm transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Novacraft-styled Logo Mark */}
         <Link to="/" className="flex items-center gap-3 group">
@@ -66,7 +69,18 @@ export const Navbar = ({ pendingApprovalCount = 0 }) => {
         </div>
 
         {/* Right Action Button */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
+          {/* Audience Wink: Human / Machine Telemetry Toggle */}
+          <button
+            onClick={() => setShowTelemetryModal(true)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-mono text-gray-300 hover:text-white hover:border-brand-orange/50 transition-all micro-interactive"
+            title="Inspect raw LangGraph state machine & statutory vector schemas"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-brand-orange animate-pulse" />
+            <span className="hidden sm:inline">Machine View</span>
+            <span className="sm:hidden">Telemetry</span>
+          </button>
+
           {isAuthenticated ? (
             <div className="flex items-center gap-3">
               <Link
@@ -76,7 +90,7 @@ export const Navbar = ({ pendingApprovalCount = 0 }) => {
                 <span className="w-2 h-2 rounded-full bg-brand-orange" />
                 <span className="font-mono">{user?.name || user?.email}</span>
                 {user?.overallRiskScore !== undefined && (
-                  <span className="font-mono text-[11px] font-bold text-brand-orange pl-1">
+                  <span className="font-mono text-[11px] font-bold text-brand-orange pl-1 tabular-nums">
                     {user.overallRiskScore}/100 Risk
                   </span>
                 )}
@@ -113,5 +127,12 @@ export const Navbar = ({ pendingApprovalCount = 0 }) => {
         </div>
       </div>
     </nav>
+
+    {/* Statutory Telemetry Modal (Machine View) */}
+    <StatutoryTelemetryModal
+      isOpen={showTelemetryModal}
+      onClose={() => setShowTelemetryModal(false)}
+    />
+  </>
   );
 };

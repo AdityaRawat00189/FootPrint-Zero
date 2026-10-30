@@ -115,7 +115,7 @@ export const DashboardPage = () => {
   });
 
   return (
-    <div className="min-h-screen pb-24 bg-[#0D0D11] text-gray-100 selection:bg-brand-orange/30">
+    <div className="min-h-screen pb-24 bg-bg-base text-gray-100 selection:bg-brand-orange/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
         {/* Top Header Banner */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-8 border-b border-white/10">
@@ -269,8 +269,8 @@ export const DashboardPage = () => {
                 <span className="font-display font-extrabold text-4xl sm:text-5xl text-emerald-400 tracking-tight">
                   {summary?.activeCases || 0}
                 </span>
-                <span className="text-xs font-mono text-gray-400 block mt-1">
-                  Dispatched under 45-day SLA
+                <span className="text-xs font-mono text-gray-300 block mt-1">
+                  Dispatched under 30-day statutory SLA (DPDPA)
                 </span>
               </div>
             </div>
@@ -291,13 +291,13 @@ export const DashboardPage = () => {
 
             {/* Filter Tabs & Search */}
             <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-1 bg-[#141419] p-1.5 rounded-full border border-white/10">
+              <div className="flex items-center gap-1 bg-[#1C1E2D] p-1.5 rounded-full border border-white/10 shadow-sm">
                 <button
                   onClick={() => setActiveTab('all')}
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
                     activeTab === 'all'
                       ? 'bg-brand-orange text-white shadow-glow-orange-sm'
-                      : 'text-gray-400 hover:text-white'
+                      : 'text-gray-300 hover:text-white'
                   }`}
                 >
                   All ({exposures.length})
@@ -307,7 +307,7 @@ export const DashboardPage = () => {
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
                     activeTab === 'broker'
                       ? 'bg-brand-orange text-white shadow-glow-orange-sm'
-                      : 'text-gray-400 hover:text-white'
+                      : 'text-gray-300 hover:text-white'
                   }`}
                 >
                   Data Brokers ({summary?.brokerCount || 0})
@@ -317,21 +317,21 @@ export const DashboardPage = () => {
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
                     activeTab === 'breach'
                       ? 'bg-brand-orange text-white shadow-glow-orange-sm'
-                      : 'text-gray-400 hover:text-white'
+                      : 'text-gray-300 hover:text-white'
                   }`}
                 >
                   Breaches ({summary?.breachCount || 0})
                 </button>
               </div>
 
-              <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#141419] border border-white/10">
-                <Search className="w-3.5 h-3.5 text-gray-500" />
+              <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#1C1E2D] border border-white/10 shadow-sm">
+                <Search className="w-3.5 h-3.5 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Filter entities..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-transparent text-xs font-mono text-white placeholder:text-gray-600 focus:outline-none w-32 sm:w-44"
+                  className="bg-transparent text-xs font-mono text-white placeholder:text-gray-400 focus:outline-none w-32 sm:w-44"
                 />
               </div>
             </div>
@@ -349,8 +349,8 @@ export const DashboardPage = () => {
               <h4 className="font-display font-bold text-white text-xl">
                 No Exposures in Current View
               </h4>
-              <p className="text-xs font-mono text-gray-400 mt-2 max-w-md mx-auto">
-                Trigger a digital footprint scan to query Have I Been Pwned and the California Data Broker Registry.
+              <p className="text-xs font-mono text-gray-300 mt-2 max-w-md mx-auto">
+                Trigger a digital footprint scan to query Have I Been Pwned and India & Global Data Broker Registries.
               </p>
               <button
                 onClick={handleTriggerScan}

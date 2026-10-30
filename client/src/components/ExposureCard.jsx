@@ -14,7 +14,7 @@ export const ExposureCard = ({ exposure, onStartCase, onViewCase, isStarting = f
       className={`p-6 rounded-3xl flex flex-col justify-between relative overflow-hidden group border ${
         lightMode
           ? 'bg-white text-gray-900 border-gray-100 shadow-card-soft'
-          : 'bg-[#141419] text-white border-white/10 shadow-card-dark hover:border-brand-orange/40'
+          : 'bg-[#1C1E2D] text-white border-white/15 shadow-xl hover:border-brand-orange/50'
       }`}
     >
       {/* Top Header */}
@@ -57,7 +57,7 @@ export const ExposureCard = ({ exposure, onStartCase, onViewCase, isStarting = f
                 className={`text-xs font-mono px-2.5 py-1 rounded-lg border ${
                   lightMode
                     ? 'bg-gray-50 border-gray-200 text-gray-700'
-                    : 'bg-[#1C1C23] border-white/5 text-gray-300'
+                    : 'bg-[#24273A] border-white/10 text-gray-200'
                 }`}
               >
                 {cat.replace(/_/g, ' ')}

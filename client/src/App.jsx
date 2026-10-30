@@ -47,7 +47,7 @@ const AppContent = () => {
   }, [isAuthenticated]);
 
   return (
-    <div className="min-h-screen flex flex-col justify-between bg-bg-base text-gray-100 selection:bg-accent-mint/20">
+    <div className="min-h-screen flex flex-col justify-between bg-bg-base text-gray-100 selection:bg-brand-orange/30">
       <div>
         <Navbar pendingApprovalCount={pendingCount} />
         <main>

@@ -1,8 +1,8 @@
 :root {
-  --bg-base: #0D0D11;
-  --bg-surface: #141419;
-  --bg-elevated: #1D1D24;
-  --bg-cream: #FAF8F5;
+  --bg-base: #141622;
+  --bg-surface: #1C1E2D;
+  --bg-elevated: #24273A;
+  --bg-cream: #FAF8F3;
   --bg-cream-surface: #F4EFEB;
   
   --brand-orange: #FF5B22;
@@ -14,11 +14,79 @@
   --text-light: #FFFFFF;
   --text-muted-light: #9CA3AF;
   
-  --border-glass: rgba(255, 255, 255, 0.08);
-  --border-glass-hover: rgba(255, 91, 34, 0.4);
+  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-glass-hover: rgba(255, 91, 34, 0.45);
 
-  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-human: 'Titillium Web', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-display: 'Titillium Web', 'Plus Jakarta Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+
+  /* Rhythm and Radii Foundations */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --r-sm: 8px;
+  --r-md: 16px;
+  --r-lg: 24px;
+  --band: 72px;
+  --blk: 56px;
+}
+
+/* Signature "Order-Ticket" Eyebrows: e.g. / 01 SCAN_EXPOSURE */
+.order-ticket-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--brand-orange);
+}
+
+.order-ticket-eyebrow::before {
+  content: '/';
+  font-weight: 700;
+  opacity: 0.85;
+}
+
+/* Specular Hairline 1px Light Sweep */
+.specular-hairline {
+  position: relative;
+  overflow: hidden;
+}
+
+.specular-hairline::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 91, 34, 0.7), rgba(255, 255, 255, 0.95), rgba(255, 91, 34, 0.7), transparent);
+  animation: specular-sweep 6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  pointer-events: none;
+}
+
+@keyframes specular-sweep {
+  0% { left: -100%; opacity: 0; }
+  12% { opacity: 1; }
+  35% { left: 160%; opacity: 0; }
+  100% { left: 160%; opacity: 0; }
+}
+
+/* Tabular Numerals for Data Integrity */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+/* Micro-interaction Helper (120ms to 160ms with signature easing) */
+.micro-interactive {
+  transition: transform 140ms var(--ease), border-color 140ms var(--ease), background-color 140ms var(--ease), box-shadow 140ms var(--ease);
+}
+
+.micro-interactive:hover {
+  transform: translateY(-2px);
 }
 
 /* Section Header Badge with Orange Dot */
@@ -26,28 +94,29 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: var(--brand-orange);
 }
 
 .section-badge::before {
   content: '';
   display: inline-block;
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 9999px;
   background-color: var(--brand-orange);
+  box-shadow: 0 0 8px rgba(255, 91, 34, 0.6);
 }
 
 /* High-Contrast Card Utilities */
 .novacraft-card-light {
   background-color: #FFFFFF;
   color: #111827;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 1.5rem;
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
@@ -56,22 +125,22 @@
 .novacraft-card-light:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.1);
-  border-color: rgba(255, 91, 34, 0.2);
+  border-color: rgba(255, 91, 34, 0.25);
 }
 
 .novacraft-card-dark {
-  background-color: #141419;
+  background-color: #1C1E2D;
   color: #FFFFFF;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 1.5rem;
-  box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .novacraft-card-dark:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 91, 34, 0.4);
-  box-shadow: 0 20px 50px -15px rgba(255, 91, 34, 0.15);
+  border-color: rgba(255, 91, 34, 0.45);
+  box-shadow: 0 20px 50px -15px rgba(255, 91, 34, 0.2);
 }
 
 .novacraft-card-orange {

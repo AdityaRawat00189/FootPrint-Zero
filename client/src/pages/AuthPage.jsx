@@ -62,14 +62,14 @@ export const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 py-16 relative bg-[#0D0D11]">
+    <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 py-16 relative bg-bg-base overflow-hidden">
       {/* Background Subtle Orange Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-brand-orange/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-brand-orange/20 via-amber-500/10 to-indigo-500/10 rounded-full blur-[140px] pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="novacraft-card-dark p-8 sm:p-10 rounded-4xl max-w-md w-full border border-white/10 relative z-10 shadow-2xl"
+        className="novacraft-card-dark p-8 sm:p-10 rounded-4xl max-w-md w-full border border-white/15 relative z-10 shadow-2xl bg-[#1C1E2D]"
       >
         {/* Brand Icon */}
         <div className="flex flex-col items-center text-center mb-8">
@@ -82,7 +82,7 @@ export const AuthPage = () => {
           <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-white tracking-tight">
             {isSignUp ? 'Create Your Account' : 'Welcome Back'}
           </h2>
-          <p className="text-xs text-gray-400 mt-1">
+          <p className="text-xs text-gray-300 mt-1">
             {isSignUp
               ? 'Initialize autonomous multi-agent privacy protection'
               : 'Sign in to access your cases and exposure monitor'}
@@ -90,7 +90,7 @@ export const AuthPage = () => {
         </div>
 
         {/* Tab Switcher */}
-        <div className="grid grid-cols-2 gap-1 p-1 bg-[#111115] rounded-full border border-white/5 mb-6">
+        <div className="grid grid-cols-2 gap-1 p-1 bg-[#141624] rounded-full border border-white/10 mb-6 shadow-inner">
           <button
             type="button"
             onClick={() => {
@@ -135,14 +135,14 @@ export const AuthPage = () => {
               <label className="block text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1.5">
                 Full Legal Name
               </label>
-              <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#111115] border border-white/10 focus-within:border-brand-orange transition-colors">
-                <User className="w-4 h-4 text-gray-500" />
+              <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#141624] border border-white/10 focus-within:border-brand-orange transition-colors shadow-inner">
+                <User className="w-4 h-4 text-gray-400" />
                 <input
                   type="text"
                   placeholder="Jane Doe"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-transparent text-xs font-mono text-white placeholder:text-gray-600 focus:outline-none"
+                  className="w-full bg-transparent text-xs font-mono text-white placeholder:text-gray-500 focus:outline-none"
                   required={isSignUp}
                 />
               </div>
@@ -153,14 +153,14 @@ export const AuthPage = () => {
             <label className="block text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1.5">
               Email Address
             </label>
-            <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#111115] border border-white/10 focus-within:border-brand-orange transition-colors">
-              <Mail className="w-4 h-4 text-gray-500" />
+            <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#141624] border border-white/10 focus-within:border-brand-orange transition-colors shadow-inner">
+              <Mail className="w-4 h-4 text-gray-400" />
               <input
                 type="email"
                 placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-transparent text-xs font-mono text-white placeholder:text-gray-600 focus:outline-none"
+                className="w-full bg-transparent text-xs font-mono text-white placeholder:text-gray-500 focus:outline-none"
                 required
               />
             </div>
@@ -170,14 +170,14 @@ export const AuthPage = () => {
             <label className="block text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1.5">
               Password
             </label>
-            <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#111115] border border-white/10 focus-within:border-brand-orange transition-colors">
-              <Lock className="w-4 h-4 text-gray-500" />
+            <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#141624] border border-white/10 focus-within:border-brand-orange transition-colors shadow-inner">
+              <Lock className="w-4 h-4 text-gray-400" />
               <input
                 type="password"
                 placeholder="••••••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-transparent text-xs font-mono text-white placeholder:text-gray-600 focus:outline-none"
+                className="w-full bg-transparent text-xs font-mono text-white placeholder:text-gray-500 focus:outline-none"
                 required
               />
             </div>
@@ -188,38 +188,38 @@ export const AuthPage = () => {
               <label className="block text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1.5">
                 Primary Jurisdiction
               </label>
-              <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#111115] border border-white/10">
-                <MapPin className="w-4 h-4 text-gray-500" />
+              <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#141624] border border-white/10 shadow-inner">
+                <MapPin className="w-4 h-4 text-gray-400" />
                 <select
                   value={state}
                   onChange={(e) => setState(e.target.value)}
                   className="w-full bg-transparent text-xs font-mono text-white focus:outline-none"
                 >
-                  <option value="DL" className="bg-[#141419] text-white">
+                  <option value="DL" className="bg-[#1C1E2D] text-white">
                     India — Delhi / NCR (DPDPA 2023 / DPBI)
                   </option>
-                  <option value="MH" className="bg-[#141419] text-white">
+                  <option value="MH" className="bg-[#1C1E2D] text-white">
                     India — Maharashtra / Mumbai (DPDPA 2023)
                   </option>
-                  <option value="KA" className="bg-[#141419] text-white">
+                  <option value="KA" className="bg-[#1C1E2D] text-white">
                     India — Karnataka / Bengaluru (DPDPA 2023)
                   </option>
-                  <option value="TN" className="bg-[#141419] text-white">
+                  <option value="TN" className="bg-[#1C1E2D] text-white">
                     India — Tamil Nadu / Chennai (DPDPA 2023)
                   </option>
-                  <option value="UP" className="bg-[#141419] text-white">
+                  <option value="UP" className="bg-[#1C1E2D] text-white">
                     India — Uttar Pradesh / Noida (DPDPA 2023)
                   </option>
-                  <option value="IN-OTHER" className="bg-[#141419] text-white">
+                  <option value="IN-OTHER" className="bg-[#1C1E2D] text-white">
                     India — All Other States & UTs (DPDPA 2023)
                   </option>
-                  <option value="CA" className="bg-[#141419] text-white">
+                  <option value="CA" className="bg-[#1C1E2D] text-white">
                     United States — California (CCPA / CPRA / SB 362)
                   </option>
-                  <option value="EU" className="bg-[#141419] text-white">
+                  <option value="EU" className="bg-[#1C1E2D] text-white">
                     European Union / UK (GDPR Article 17)
                   </option>
-                  <option value="GLOBAL" className="bg-[#141419] text-white">
+                  <option value="GLOBAL" className="bg-[#1C1E2D] text-white">
                     Other Global / International
                   </option>
                 </select>

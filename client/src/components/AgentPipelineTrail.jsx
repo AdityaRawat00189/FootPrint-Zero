@@ -17,21 +17,21 @@ const PIPELINE_NODES = [
     key: 'discovery',
     name: 'Discovery Agent',
     label: 'Discovery',
-    description: 'Scans HIBP breaches & California Broker Registry',
+    description: 'Scans HIBP breaches & India/Global Aggregator Registries',
     icon: Search,
   },
   {
     key: 'risk_ranking',
     name: 'Risk Ranking Agent',
     label: 'Risk Ranking',
-    description: 'Calculates sensitivity weights for SSN, phone, address',
+    description: 'Calculates sensitivity weights for Aadhaar, PAN, phone & financials',
     icon: Activity,
   },
   {
     key: 'legal_drafting',
     name: 'Legal Drafting Agent',
     label: 'Legal Drafting',
-    description: 'Synthesizes CCPA/GDPR clauses via ChromaDB RAG & Gemini',
+    description: 'Synthesizes DPDPA/GDPR/CCPA clauses via ChromaDB RAG',
     icon: FileText,
   },
   {
@@ -45,14 +45,14 @@ const PIPELINE_NODES = [
     key: 'executor',
     name: 'Executor Agent',
     label: 'Notice Dispatch',
-    description: 'Formal transmission & 45-day SLA clock initiation',
+    description: 'Formal transmission & statutory 30-day (DPDPA) clock initiation',
     icon: Send,
   },
   {
     key: 'followup',
     name: 'Follow-up Agent',
     label: 'SLA Monitoring',
-    description: 'Scheduled CPPA/FTC regulatory escalation',
+    description: 'Scheduled DPBI / CPPA regulatory escalation',
     icon: Clock,
   },
 ];
@@ -150,12 +150,12 @@ export const AgentPipelineTrail = ({
                 }}
                 className={`flex md:flex-col items-center gap-3.5 p-4 rounded-3xl cursor-pointer transition-all duration-300 ${
                   selectedNodeIndex === index
-                    ? 'bg-[#1C1C24] border-2 border-brand-orange shadow-glow-orange'
+                    ? 'bg-[#24273A] border-2 border-brand-orange shadow-glow-orange'
                     : isActive
-                    ? 'bg-[#1C1C24] border border-brand-orange shadow-glow-orange-sm'
+                    ? 'bg-[#24273A] border border-brand-orange shadow-glow-orange-sm'
                     : isCompleted
-                    ? 'bg-[#18181E] border border-white/10 hover:border-brand-orange/40'
-                    : 'bg-[#141419] border border-white/5 opacity-50 hover:opacity-80'
+                    ? 'bg-[#1E2132] border border-white/10 hover:border-brand-orange/40'
+                    : 'bg-[#181A28] border border-white/5 opacity-60 hover:opacity-90'
                 }`}
               >
                 {/* Node Icon Circle */}

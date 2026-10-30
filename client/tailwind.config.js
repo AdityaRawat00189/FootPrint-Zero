@@ -6,10 +6,10 @@ export default {
     extend: {
       colors: {
         bg: {
-          base: '#0D0D11',
-          surface: '#141419',
-          elevated: '#1D1D24',
-          card: '#18181E',
+          base: '#141622',
+          surface: '#1C1E2D',
+          elevated: '#24273A',
+          card: '#1F2233',
           cream: '#FAF8F5',
           'cream-surface': '#F4EFEB',
           'cream-card': '#FFFFFF',
@@ -19,9 +19,9 @@ export default {
           'orange-hover': '#E84A12',
           'orange-light': '#FFF0EB',
           'orange-muted': 'rgba(255, 91, 34, 0.12)',
-          dark: '#0D0D11',
-          charcoal: '#18181E',
-          gray: '#8E8E9A',
+          dark: '#141622',
+          charcoal: '#1C1E2D',
+          gray: '#9496A1',
         },
         accent: {
           orange: '#FF5B22',
@@ -29,12 +29,12 @@ export default {
           cyan: '#06B6D4',
           emerald: '#10B981',
           rose: '#EF4444',
-          dark: '#141419',
+          dark: '#1C1E2D',
         },
         glass: {
-          border: 'rgba(255, 255, 255, 0.08)',
+          border: 'rgba(255, 255, 255, 0.12)',
           'border-light': 'rgba(0, 0, 0, 0.08)',
-          'border-hover': 'rgba(255, 91, 34, 0.4)',
+          'border-hover': 'rgba(255, 91, 34, 0.45)',
         },
       },
       fontFamily: {
@@ -44,7 +44,7 @@ export default {
       },
       backgroundImage: {
         'brand-gradient': 'linear-gradient(135deg, #FF5B22 0%, #FF8A5B 100%)',
-        'dark-gradient': 'linear-gradient(180deg, #141419 0%, #0D0D11 100%)',
+        'dark-gradient': 'linear-gradient(180deg, #1C1E2D 0%, #141622 100%)',
         'orange-card-gradient': 'linear-gradient(135deg, #FF5B22 0%, #E8450E 100%)',
       },
       boxShadow: {
