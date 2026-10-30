@@ -99,22 +99,22 @@ export const ApprovalQueuePage = () => {
     <div className="min-h-screen pb-24 bg-bg-base text-gray-100 selection:bg-brand-orange/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
           <div>
-            <div className="section-badge mb-1">
-              HUMAN-IN-THE-LOOP AUTHORIZATION GATE
+            <div className="badge-pill mb-2">
+              Human Review & Authorization
             </div>
             <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
-              Statutory Approval Queue
+              Review Deletion Notices
             </h1>
-            <p className="text-xs font-mono text-gray-400 mt-1">
-              Review, edit, and authorize LangGraph statutory notices before formal dispatch
+            <p className="text-xs text-slate-400 mt-1">
+              Read, edit, and authorize legal requests before they are sent to data brokers
             </p>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono px-4 py-2 rounded-full bg-[#1C1E2D] border border-white/10 text-brand-orange font-bold shadow-sm">
-              {approvals.length} {approvals.length === 1 ? 'Notice' : 'Notices'} Pending Review
+            <span className="text-xs font-semibold px-4 py-2 rounded-full bg-slate-900 border border-white/[0.08] text-blue-400 shadow-sm">
+              {approvals.length} {approvals.length === 1 ? 'Notice' : 'Notices'} Waiting for You
             </span>
           </div>
         </div>
@@ -124,17 +124,17 @@ export const ApprovalQueuePage = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`mt-6 p-4 rounded-2xl border flex items-center gap-3 text-xs font-mono ${
+            className={`mt-6 p-4 rounded-2xl border flex items-center gap-3 text-xs ${
               notification.type === 'error'
                 ? 'bg-rose-500/10 border-rose-500/20 text-rose-300'
-                : 'bg-brand-orange/15 border-brand-orange/30 text-brand-orange'
+                : 'bg-blue-500/10 border-blue-500/20 text-blue-300'
             }`}
           >
-            <Zap className="w-4 h-4 flex-shrink-0" />
-            <span className="flex-1">{notification.message}</span>
+            <Zap className="w-4 h-4 flex-shrink-0 text-blue-400" />
+            <span className="flex-1 font-medium">{notification.message}</span>
             <button
               onClick={() => setNotification(null)}
-              className="text-gray-400 hover:text-white"
+              className="text-slate-400 hover:text-white"
             >
               ✕
             </button>
@@ -143,24 +143,24 @@ export const ApprovalQueuePage = () => {
 
         {/* Main Content */}
         {loading ? (
-          <div className="py-24 text-center font-mono text-xs text-gray-400 flex flex-col items-center justify-center gap-3">
-            <RefreshCw className="w-6 h-6 animate-spin text-brand-orange" />
-            <span>Loading pending legal notices...</span>
+          <div className="py-24 text-center text-xs text-slate-400 flex flex-col items-center justify-center gap-3">
+            <RefreshCw className="w-6 h-6 animate-spin text-blue-500" />
+            <span>Loading legal notice drafts...</span>
           </div>
         ) : approvals.length === 0 ? (
-          <div className="novacraft-card-dark p-16 rounded-4xl text-center mt-10">
-            <CheckCircle2 className="w-14 h-14 text-brand-orange mx-auto mb-4 shadow-glow-orange-sm" />
+          <div className="app-card p-16 rounded-3xl text-center mt-10">
+            <CheckCircle2 className="w-14 h-14 text-emerald-400 mx-auto mb-4" />
             <h3 className="font-display font-extrabold text-2xl text-white">
-              Approval Queue Cleared
+              All Caught Up!
             </h3>
-            <p className="text-sm text-gray-400 mt-2 max-w-md mx-auto">
-              All drafted statutory deletion requests have been authorized and dispatched.
+            <p className="text-sm text-slate-400 mt-2 max-w-md mx-auto leading-relaxed">
+              You have no pending deletion notices waiting for review. You can trigger new requests from your dashboard anytime.
             </p>
             <button
               onClick={() => navigate('/dashboard')}
-              className="btn-primary-orange mt-6 inline-flex items-center gap-2 text-xs font-semibold px-7 py-3.5 rounded-full"
+              className="btn-primary mt-6 inline-flex items-center gap-2 text-xs font-semibold px-7 py-3.5 rounded-full"
             >
-              <span>Return to Dashboard</span>
+              <span>Back to Dashboard</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -168,7 +168,7 @@ export const ApprovalQueuePage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-10">
             {/* Left Column: Queue Selector Sidebar */}
             <div className="lg:col-span-4 flex flex-col gap-4">
-              <span className="text-xs font-mono uppercase tracking-wider text-gray-400 px-1">
+              <span className="text-xs uppercase tracking-wider text-slate-400 font-semibold px-1">
                 Pending Notices ({approvals.length})
               </span>
 
@@ -179,10 +179,10 @@ export const ApprovalQueuePage = () => {
                     key={item._id}
                     onClick={() => setSelectedCaseId(item._id)}
                     whileHover={{ x: 3 }}
-                    className={`p-5 rounded-3xl cursor-pointer border transition-all ${
+                    className={`p-5 rounded-2xl cursor-pointer border transition-all ${
                       isSelected
-                        ? 'bg-[#24273A] border-2 border-brand-orange shadow-glow-orange-sm'
-                        : 'bg-[#1C1E2D] border-white/10 hover:border-white/20'
+                        ? 'bg-slate-900 border-2 border-blue-500 shadow-glow-blue'
+                        : 'bg-[#111726] border-white/[0.08] hover:border-white/[0.18]'
                     }`}
                   >
                     <div className="flex items-center justify-between">
@@ -195,13 +195,13 @@ export const ApprovalQueuePage = () => {
                     <h4 className="font-display font-bold text-white text-base mt-2.5">
                       {item.targetEntityName}
                     </h4>
-                    <span className="text-xs font-mono text-gray-400 block mt-0.5">
+                    <span className="text-xs text-slate-400 block mt-0.5">
                       {item.targetEntityEmail}
                     </span>
 
-                    <div className="mt-4 pt-3 border-t border-white/5 flex items-center justify-between text-xs font-mono text-gray-400">
-                      <span>Framework: {item.legalFramework}</span>
-                      <span className="text-brand-orange font-semibold">Review & Authorize →</span>
+                    <div className="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between text-xs text-slate-400">
+                      <span>Law: {item.legalFramework}</span>
+                      <span className="text-blue-400 font-semibold">Review Draft →</span>
                     </div>
                   </motion.div>
                 );

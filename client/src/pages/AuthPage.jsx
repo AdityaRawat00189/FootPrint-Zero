@@ -62,35 +62,35 @@ export const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 py-16 relative bg-bg-base overflow-hidden">
-      {/* Background Subtle Orange Glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[550px] h-[550px] bg-gradient-to-tr from-brand-orange/20 via-amber-500/10 to-indigo-500/10 rounded-full blur-[140px] pointer-events-none" />
+    <div className="min-h-[calc(100vh-5rem)] flex items-center justify-center px-4 py-16 relative bg-[#090D16] overflow-hidden">
+      {/* Background Subtle Glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[550px] h-[450px] bg-gradient-to-tr from-blue-600/15 via-indigo-600/10 to-cyan-500/10 rounded-full blur-[130px] pointer-events-none" />
 
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="novacraft-card-dark p-8 sm:p-10 rounded-4xl max-w-md w-full border border-white/15 relative z-10 shadow-2xl bg-[#1C1E2D]"
+        className="app-card p-8 sm:p-10 rounded-3xl max-w-md w-full border border-white/[0.08] relative z-10 shadow-2xl bg-[#0F172A]"
       >
         {/* Brand Icon */}
         <div className="flex flex-col items-center text-center mb-8">
-          <div className="w-12 h-12 rounded-2xl bg-brand-orange flex items-center justify-center text-white font-display font-extrabold text-xl shadow-glow-orange mb-4">
-            FP
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-glow-blue mb-4">
+            <Lock className="w-5 h-5 text-white" />
           </div>
-          <div className="section-badge mb-1">
-            {isSignUp ? 'NEW ACCOUNT' : 'SECURE ACCESS'}
+          <div className="badge-pill mb-1.5">
+            {isSignUp ? 'New Account' : 'Account Access'}
           </div>
           <h2 className="font-display font-extrabold text-2xl sm:text-3xl text-white tracking-tight">
             {isSignUp ? 'Create Your Account' : 'Welcome Back'}
           </h2>
-          <p className="text-xs text-gray-300 mt-1">
+          <p className="text-xs text-slate-400 mt-1">
             {isSignUp
-              ? 'Initialize autonomous multi-agent privacy protection'
-              : 'Sign in to access your cases and exposure monitor'}
+              ? 'Start checking your data exposure and requesting removals'
+              : 'Sign in to access your cases and monitor status'}
           </p>
         </div>
 
         {/* Tab Switcher */}
-        <div className="grid grid-cols-2 gap-1 p-1 bg-[#141624] rounded-full border border-white/10 mb-6 shadow-inner">
+        <div className="grid grid-cols-2 gap-1 p-1 bg-slate-900 rounded-full border border-white/[0.08] mb-6 shadow-inner">
           <button
             type="button"
             onClick={() => {
@@ -99,8 +99,8 @@ export const AuthPage = () => {
             }}
             className={`py-2 text-xs font-semibold rounded-full transition-all ${
               !isSignUp
-                ? 'bg-brand-orange text-white shadow-glow-orange-sm'
-                : 'text-gray-400 hover:text-gray-200'
+                ? 'bg-blue-600 text-white shadow-glow-blue'
+                : 'text-slate-400 hover:text-slate-200'
             }`}
           >
             Sign In
@@ -113,8 +113,8 @@ export const AuthPage = () => {
             }}
             className={`py-2 text-xs font-semibold rounded-full transition-all ${
               isSignUp
-                ? 'bg-brand-orange text-white shadow-glow-orange-sm'
-                : 'text-gray-400 hover:text-gray-200'
+                ? 'bg-blue-600 text-white shadow-glow-blue'
+                : 'text-slate-400 hover:text-slate-200'
             }`}
           >
             Sign Up
@@ -122,7 +122,7 @@ export const AuthPage = () => {
         </div>
 
         {error && (
-          <div className="mb-5 p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center gap-2.5 text-xs text-rose-400 font-mono">
+          <div className="mb-5 p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/20 flex items-center gap-2.5 text-xs text-rose-400">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             <span>{error}</span>
           </div>
@@ -132,17 +132,17 @@ export const AuthPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {isSignUp && (
             <div>
-              <label className="block text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1.5">
-                Full Legal Name
+              <label className="block text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1.5">
+                Full Name
               </label>
-              <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#141624] border border-white/10 focus-within:border-brand-orange transition-colors shadow-inner">
-                <User className="w-4 h-4 text-gray-400" />
+              <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900 border border-white/[0.08] focus-within:border-blue-500 transition-colors shadow-inner">
+                <User className="w-4 h-4 text-slate-400" />
                 <input
                   type="text"
                   placeholder="Jane Doe"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full bg-transparent text-xs font-mono text-white placeholder:text-gray-500 focus:outline-none"
+                  className="w-full bg-transparent text-xs text-white placeholder:text-slate-500 focus:outline-none"
                   required={isSignUp}
                 />
               </div>
@@ -150,34 +150,34 @@ export const AuthPage = () => {
           )}
 
           <div>
-            <label className="block text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1.5">
+            <label className="block text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1.5">
               Email Address
             </label>
-            <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#141624] border border-white/10 focus-within:border-brand-orange transition-colors shadow-inner">
-              <Mail className="w-4 h-4 text-gray-400" />
+            <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900 border border-white/[0.08] focus-within:border-blue-500 transition-colors shadow-inner">
+              <Mail className="w-4 h-4 text-slate-400" />
               <input
                 type="email"
                 placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-transparent text-xs font-mono text-white placeholder:text-gray-500 focus:outline-none"
+                className="w-full bg-transparent text-xs text-white placeholder:text-slate-500 focus:outline-none"
                 required
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1.5">
+            <label className="block text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1.5">
               Password
             </label>
-            <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#141624] border border-white/10 focus-within:border-brand-orange transition-colors shadow-inner">
-              <Lock className="w-4 h-4 text-gray-400" />
+            <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900 border border-white/[0.08] focus-within:border-blue-500 transition-colors shadow-inner">
+              <Lock className="w-4 h-4 text-slate-400" />
               <input
                 type="password"
                 placeholder="••••••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-transparent text-xs font-mono text-white placeholder:text-gray-500 focus:outline-none"
+                className="w-full bg-transparent text-xs text-white placeholder:text-slate-500 focus:outline-none"
                 required
               />
             </div>
@@ -185,42 +185,42 @@ export const AuthPage = () => {
 
           {isSignUp && (
             <div>
-              <label className="block text-[11px] font-mono uppercase tracking-wider text-gray-400 mb-1.5">
-                Primary Jurisdiction
+              <label className="block text-[11px] uppercase tracking-wider text-slate-400 font-semibold mb-1.5">
+                Location / Applicable Law
               </label>
-              <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-[#141624] border border-white/10 shadow-inner">
-                <MapPin className="w-4 h-4 text-gray-400" />
+              <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900 border border-white/[0.08] shadow-inner">
+                <MapPin className="w-4 h-4 text-slate-400" />
                 <select
                   value={state}
                   onChange={(e) => setState(e.target.value)}
-                  className="w-full bg-transparent text-xs font-mono text-white focus:outline-none"
+                  className="w-full bg-transparent text-xs text-white focus:outline-none"
                 >
-                  <option value="DL" className="bg-[#1C1E2D] text-white">
-                    India — Delhi / NCR (DPDPA 2023 / DPBI)
+                  <option value="DL" className="bg-slate-900 text-white">
+                    India — Delhi / NCR (DPDPA 2023)
                   </option>
-                  <option value="MH" className="bg-[#1C1E2D] text-white">
+                  <option value="MH" className="bg-slate-900 text-white">
                     India — Maharashtra / Mumbai (DPDPA 2023)
                   </option>
-                  <option value="KA" className="bg-[#1C1E2D] text-white">
+                  <option value="KA" className="bg-slate-900 text-white">
                     India — Karnataka / Bengaluru (DPDPA 2023)
                   </option>
-                  <option value="TN" className="bg-[#1C1E2D] text-white">
+                  <option value="TN" className="bg-slate-900 text-white">
                     India — Tamil Nadu / Chennai (DPDPA 2023)
                   </option>
-                  <option value="UP" className="bg-[#1C1E2D] text-white">
+                  <option value="UP" className="bg-slate-900 text-white">
                     India — Uttar Pradesh / Noida (DPDPA 2023)
                   </option>
-                  <option value="IN-OTHER" className="bg-[#1C1E2D] text-white">
+                  <option value="IN-OTHER" className="bg-slate-900 text-white">
                     India — All Other States & UTs (DPDPA 2023)
                   </option>
-                  <option value="CA" className="bg-[#1C1E2D] text-white">
-                    United States — California (CCPA / CPRA / SB 362)
+                  <option value="CA" className="bg-slate-900 text-white">
+                    United States — California (CCPA / CPRA)
                   </option>
-                  <option value="EU" className="bg-[#1C1E2D] text-white">
+                  <option value="EU" className="bg-slate-900 text-white">
                     European Union / UK (GDPR Article 17)
                   </option>
-                  <option value="GLOBAL" className="bg-[#1C1E2D] text-white">
-                    Other Global / International
+                  <option value="GLOBAL" className="bg-slate-900 text-white">
+                    Other International
                   </option>
                 </select>
               </div>
@@ -230,9 +230,9 @@ export const AuthPage = () => {
           <button
             type="submit"
             disabled={loading}
-            className="btn-primary-orange w-full mt-4 flex items-center justify-center gap-2 text-xs font-semibold py-4 rounded-full disabled:opacity-50"
+            className="btn-primary w-full mt-4 flex items-center justify-center gap-2 text-xs font-semibold py-4 rounded-full disabled:opacity-50"
           >
-            <span>{loading ? 'Authenticating...' : isSignUp ? 'Create & Launch Scanner' : 'Sign In to Dashboard'}</span>
+            <span>{loading ? 'Please wait...' : isSignUp ? 'Create Account & Start' : 'Sign In'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>

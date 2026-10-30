@@ -172,7 +172,7 @@ export const HeroAskLoop = () => {
       return (
         <span
           key={wIdx}
-          className={isHighlighted ? 'text-brand-orange font-semibold' : 'text-gray-100'}
+          className={isHighlighted ? 'text-blue-400 font-semibold' : 'text-slate-100'}
         >
           {word}{' '}
         </span>
@@ -206,19 +206,19 @@ export const HeroAskLoop = () => {
       {/* Main Specular Container */}
       <div
         style={{ minHeight: `${minCardHeight}px` }}
-        className="novacraft-card-dark specular-hairline p-7 rounded-3xl border border-white/12 bg-[#1C1E2D] shadow-2xl relative flex flex-col justify-between transition-all duration-300"
+        className="app-card p-7 rounded-3xl border border-white/[0.08] bg-[#0E1526] shadow-2xl relative flex flex-col justify-between transition-all duration-300"
       >
         {/* Top Eyebrow Ticket */}
         <div>
-          <div className="flex items-center justify-between pb-4 border-b border-white/10">
+          <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
             <div className="flex items-center gap-2">
-              <span className="order-ticket-eyebrow">
-                / 0{currentIndex + 1} CITIZEN_AUDIT_QUERY
+              <span className="text-xs font-semibold text-blue-400">
+                Example Privacy Check #{currentIndex + 1}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-brand-orange/10 text-brand-orange border border-brand-orange/20 font-bold">
-                LIVE STATE MACHINE
+              <span className="text-[10px] font-semibold tracking-wider px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20">
+                Live Simulation
               </span>
             </div>
           </div>
@@ -228,7 +228,7 @@ export const HeroAskLoop = () => {
             <p className="font-display font-medium text-base sm:text-lg text-white leading-snug">
               {renderedQuestion}
               {stage === 'typing' && (
-                <span className="inline-block w-2 h-4 ml-1 bg-brand-orange animate-pulse align-middle" />
+                <span className="inline-block w-2 h-4 ml-1 bg-blue-400 animate-pulse align-middle" />
               )}
             </p>
           </div>
@@ -249,23 +249,23 @@ export const HeroAskLoop = () => {
                   initial={{ opacity: 0, y: 7 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.07, duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                  className="p-3.5 rounded-2xl bg-[#141624] border border-white/10 flex items-center justify-between gap-3 shadow-inner"
+                  className="p-3.5 rounded-2xl bg-slate-900/80 border border-white/[0.08] flex items-center justify-between gap-3 shadow-inner"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-brand-orange/15 text-brand-orange flex items-center justify-center font-bold text-xs">
+                    <div className="w-8 h-8 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-xs">
                       <Database className="w-4 h-4" />
                     </div>
                     <div>
-                      <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider block">
-                        Target Data Aggregator
+                      <span className="text-[10px] text-slate-400 font-medium uppercase tracking-wider block">
+                        Target Data Broker
                       </span>
                       <span className="text-xs font-display font-bold text-white">
                         {currentItem.targetEntity}
                       </span>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 font-semibold">
-                    MATCHED
+                  <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    DETECTED
                   </span>
                 </motion.div>
 
@@ -274,28 +274,28 @@ export const HeroAskLoop = () => {
                   initial={{ opacity: 0, y: 7 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.14, duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                  className="p-3.5 rounded-2xl bg-[#141624] border border-white/10 grid grid-cols-12 gap-3 items-center shadow-inner"
+                  className="p-3.5 rounded-2xl bg-slate-900/80 border border-white/[0.08] grid grid-cols-12 gap-3 items-center shadow-inner"
                 >
-                  <div className="col-span-4 border-r border-white/10 pr-3">
-                    <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider block">
-                      Vulnerability
+                  <div className="col-span-4 border-r border-white/[0.08] pr-3">
+                    <span className="text-[10px] text-slate-400 font-medium uppercase tracking-wider block">
+                      Risk Level
                     </span>
                     <div className="flex items-baseline gap-1 mt-0.5">
-                      <span className="font-mono text-2xl font-bold text-brand-orange tabular-nums">
+                      <span className="font-mono text-2xl font-bold text-blue-400 tabular-nums">
                         {displayedScore}
                       </span>
-                      <span className="font-mono text-xs text-gray-400">/100</span>
+                      <span className="font-mono text-xs text-slate-400">/100</span>
                     </div>
                   </div>
                   <div className="col-span-8 pl-1">
-                    <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider block mb-1">
-                      Identified PII Vectors
+                    <span className="text-[10px] text-slate-400 font-medium uppercase tracking-wider block mb-1">
+                      Leaked Information
                     </span>
                     <div className="flex flex-wrap gap-1">
                       {currentItem.exposedData.map((d, idx) => (
                         <span
                           key={idx}
-                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-gray-200"
+                          className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/[0.04] border border-white/[0.08] text-slate-200"
                         >
                           {d}
                         </span>
@@ -309,41 +309,41 @@ export const HeroAskLoop = () => {
                   initial={{ opacity: 0, y: 7 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.21, duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                  className="p-3.5 rounded-2xl bg-[#141624] border border-white/10 shadow-inner"
+                  className="p-3.5 rounded-2xl bg-slate-900/80 border border-white/[0.08] shadow-inner"
                 >
-                  <div className="flex items-center justify-between text-[11px] font-mono text-gray-300 mb-1.5">
-                    <span className="text-brand-orange font-semibold flex items-center gap-1.5">
+                  <div className="flex items-center justify-between text-[11px] text-slate-300 mb-1.5">
+                    <span className="text-blue-400 font-semibold flex items-center gap-1.5">
                       <Scale className="w-3.5 h-3.5" />
                       {currentItem.legalCitation}
                     </span>
-                    <span className="text-gray-400 text-[10px]">{currentItem.slaWindow}</span>
+                    <span className="text-slate-400 text-[10px]">{currentItem.slaWindow}</span>
                   </div>
 
-                  {/* Filling SLA Bar over 330ms */}
-                  <div className="w-full h-1.5 rounded-full bg-white/10 overflow-hidden relative mt-2">
+                  {/* Progress Bar */}
+                  <div className="w-full h-1.5 rounded-full bg-white/[0.08] overflow-hidden relative mt-2">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${currentItem.slaProgress}%` }}
                       transition={{ duration: 0.33, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
-                      className="h-full bg-gradient-to-r from-brand-orange to-amber-400 rounded-full"
+                      className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"
                     />
                   </div>
                 </motion.div>
 
-                {/* Row 4: Regulatory Authority & Fine Guarantee */}
+                {/* Row 4: Regulatory Authority & Guarantee */}
                 <motion.div
                   initial={{ opacity: 0, y: 7 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.28, duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-                  className="flex items-center justify-between pt-1 text-[11px] font-mono text-gray-400"
+                  className="flex items-center justify-between pt-1 text-[11px] text-slate-400"
                 >
-                  <div className="flex items-center gap-1.5 text-gray-300">
-                    <Shield className="w-3.5 h-3.5 text-brand-orange" />
+                  <div className="flex items-center gap-1.5 text-slate-300">
+                    <Shield className="w-3.5 h-3.5 text-indigo-400" />
                     <span>{currentItem.penaltySchedule}</span>
                   </div>
                   <span className="text-emerald-400 font-semibold flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3" />
-                    Notice Armed
+                    Ready to Send
                   </span>
                 </motion.div>
               </motion.div>
@@ -352,7 +352,7 @@ export const HeroAskLoop = () => {
         </div>
 
         {/* Footer Micro-Dots Indicator */}
-        <div className="pt-4 border-t border-white/10 flex items-center justify-between mt-4">
+        <div className="pt-4 border-t border-white/[0.08] flex items-center justify-between mt-4">
           <div className="flex items-center gap-1.5">
             {AUDIT_QUESTIONS.map((q, idx) => (
               <button
@@ -364,15 +364,15 @@ export const HeroAskLoop = () => {
                   setStage('typing');
                 }}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
-                  currentIndex === idx ? 'w-6 bg-brand-orange' : 'w-2 bg-white/20 hover:bg-white/40'
+                  currentIndex === idx ? 'w-6 bg-blue-500' : 'w-2 bg-white/20 hover:bg-white/40'
                 }`}
-                title={`Audit Example 0${idx + 1}`}
+                title={`Example 0${idx + 1}`}
               />
             ))}
           </div>
 
-          <span className="text-[10px] font-mono text-gray-400">
-            {isHovered ? 'Paused on Hover' : 'Rotating Telemetry Loop (3.2s)'}
+          <span className="text-[10px] text-slate-400">
+            {isHovered ? 'Paused on Hover' : 'Auto-cycles every 3.4s'}
           </span>
         </div>
       </div>

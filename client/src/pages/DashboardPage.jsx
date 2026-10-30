@@ -115,19 +115,19 @@ export const DashboardPage = () => {
   });
 
   return (
-    <div className="min-h-screen pb-24 bg-bg-base text-gray-100 selection:bg-brand-orange/30">
+    <div className="min-h-screen pb-24 bg-[#090D16] text-slate-100 selection:bg-blue-500/30 selection:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
         {/* Top Header Banner */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-8 border-b border-white/10">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-8 border-b border-white/[0.08]">
           <div>
-            <div className="section-badge mb-1">
-              REAL-TIME PRIVACY INTELLIGENCE
+            <div className="badge-pill mb-2">
+              Privacy Command Center
             </div>
             <h1 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight">
-              Digital Footprint Dashboard
+              Privacy Dashboard
             </h1>
-            <p className="text-xs font-mono text-gray-400 mt-1">
-              Active profile: <span className="text-white font-bold">{user?.email}</span> (Jurisdiction: {user?.state || 'CA'})
+            <p className="text-xs text-slate-400 mt-1">
+              Active account: <span className="text-slate-200 font-semibold">{user?.email}</span> (Jurisdiction: {user?.state || 'India/Global'})
             </p>
           </div>
 
@@ -135,10 +135,10 @@ export const DashboardPage = () => {
             <button
               onClick={handleTriggerScan}
               disabled={scanning}
-              className="btn-primary-orange flex items-center gap-2 text-xs font-semibold px-6 py-3.5 rounded-full disabled:opacity-50"
+              className="btn-primary flex items-center gap-2 text-xs font-semibold px-6 py-3.5 rounded-full disabled:opacity-50"
             >
               <RefreshCw className={`w-4 h-4 ${scanning ? 'animate-spin' : ''}`} />
-              <span>{scanning ? 'Scanning Footprint...' : 'Run Footprint Scan'}</span>
+              <span>{scanning ? 'Scanning Leaks...' : 'Scan for Leaks'}</span>
             </button>
           </div>
         </div>
@@ -148,17 +148,17 @@ export const DashboardPage = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`mt-6 p-4 rounded-2xl border flex items-center gap-3 text-xs font-mono ${
+            className={`mt-6 p-4 rounded-2xl border flex items-center gap-3 text-xs ${
               notification.type === 'error'
                 ? 'bg-rose-500/10 border-rose-500/20 text-rose-300'
-                : 'bg-brand-orange/15 border-brand-orange/30 text-brand-orange'
+                : 'bg-blue-500/10 border-blue-500/25 text-blue-300'
             }`}
           >
-            <Zap className="w-4 h-4 flex-shrink-0" />
-            <span className="flex-1">{notification.message}</span>
+            <Zap className="w-4 h-4 flex-shrink-0 text-blue-400" />
+            <span className="flex-1 font-medium">{notification.message}</span>
             <button
               onClick={() => setNotification(null)}
-              className="text-gray-400 hover:text-white"
+              className="text-slate-400 hover:text-white"
             >
               ✕
             </button>
@@ -168,13 +168,13 @@ export const DashboardPage = () => {
         {/* Risk Score & Summary Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-8">
           {/* Main Risk Score Card */}
-          <div className="lg:col-span-4 novacraft-card-dark p-8 rounded-4xl flex flex-col items-center justify-between">
-            <div className="w-full flex items-center justify-between pb-3 border-b border-white/10">
-              <span className="section-badge text-[11px]">
-                COMPOSITE RISK
+          <div className="lg:col-span-4 app-card p-8 rounded-3xl flex flex-col items-center justify-between">
+            <div className="w-full flex items-center justify-between pb-3 border-b border-white/[0.08]">
+              <span className="text-xs font-semibold text-slate-300">
+                Overall Privacy Risk
               </span>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-brand-orange/10 text-brand-orange font-bold">
-                LIVE METRIC
+              <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-300 border border-blue-500/20">
+                Calculated
               </span>
             </div>
 
@@ -182,19 +182,19 @@ export const DashboardPage = () => {
               <RiskScoreGauge score={summary?.overallRiskScore || 0} size={190} />
             </div>
 
-            <p className="text-xs font-mono text-gray-400 text-center">
-              Evaluated across {summary?.totalExposures || 0} identified data broker profiles and breach repositories.
+            <p className="text-xs text-slate-400 text-center leading-relaxed">
+              Based on {summary?.totalExposures || 0} discovered data broker records and known breach leaks.
             </p>
           </div>
 
-          {/* Metric Overview Cards (Novacraft Reference Style) */}
+          {/* Metric Overview Cards */}
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div className="novacraft-card-dark p-7 rounded-3xl flex flex-col justify-between">
+            <div className="app-card p-7 rounded-2xl flex flex-col justify-between">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-wider text-gray-400">
-                  Data Brokers Holding Info
+                <span className="text-xs uppercase tracking-wider text-slate-400 font-semibold">
+                  Data Brokers Found
                 </span>
-                <div className="w-9 h-9 rounded-xl bg-brand-orange/10 text-brand-orange flex items-center justify-center">
+                <div className="w-9 h-9 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
                   <Database className="w-4 h-4" />
                 </div>
               </div>
@@ -202,16 +202,16 @@ export const DashboardPage = () => {
                 <span className="font-display font-extrabold text-4xl sm:text-5xl text-white tracking-tight">
                   {summary?.brokerCount || 0}
                 </span>
-                <span className="text-xs font-mono text-gray-400 block mt-1">
-                  Active commercial data aggregators
+                <span className="text-xs text-slate-400 block mt-1">
+                  Directories holding your contact & profile info
                 </span>
               </div>
             </div>
 
-            <div className="novacraft-card-dark p-7 rounded-3xl flex flex-col justify-between">
+            <div className="app-card p-7 rounded-2xl flex flex-col justify-between">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-wider text-gray-400">
-                  Breach Exposures
+                <span className="text-xs uppercase tracking-wider text-slate-400 font-semibold">
+                  Security Breaches
                 </span>
                 <div className="w-9 h-9 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center">
                   <ShieldAlert className="w-4 h-4" />
@@ -221,16 +221,16 @@ export const DashboardPage = () => {
                 <span className="font-display font-extrabold text-4xl sm:text-5xl text-rose-400 tracking-tight">
                   {summary?.breachCount || 0}
                 </span>
-                <span className="text-xs font-mono text-gray-400 block mt-1">
-                  Public security breaches detected
+                <span className="text-xs text-slate-400 block mt-1">
+                  Public database leaks containing your accounts
                 </span>
               </div>
             </div>
 
-            <div className="novacraft-card-dark p-7 rounded-3xl flex flex-col justify-between">
+            <div className="app-card p-7 rounded-2xl flex flex-col justify-between">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-wider text-gray-400">
-                  Pending Human Approval
+                <span className="text-xs uppercase tracking-wider text-slate-400 font-semibold">
+                  Ready for Your Review
                 </span>
                 <div className="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
                   <CheckSquare className="w-4 h-4" />
@@ -241,14 +241,14 @@ export const DashboardPage = () => {
                   <span className="font-display font-extrabold text-4xl sm:text-5xl text-amber-400 tracking-tight">
                     {summary?.pendingApprovals || 0}
                   </span>
-                  <span className="text-xs font-mono text-gray-400 block mt-1">
-                    Statutory letters ready for review
+                  <span className="text-xs text-slate-400 block mt-1">
+                    Drafted deletion notices awaiting approval
                   </span>
                 </div>
                 {summary?.pendingApprovals > 0 && (
                   <button
                     onClick={() => navigate('/approvals')}
-                    className="text-xs font-semibold text-brand-orange hover:underline flex items-center gap-1"
+                    className="text-xs font-semibold text-blue-400 hover:text-blue-300 flex items-center gap-1 transition-colors"
                   >
                     <span>Open Queue →</span>
                   </button>
@@ -256,10 +256,10 @@ export const DashboardPage = () => {
               </div>
             </div>
 
-            <div className="novacraft-card-dark p-7 rounded-3xl flex flex-col justify-between">
+            <div className="app-card p-7 rounded-2xl flex flex-col justify-between">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-mono uppercase tracking-wider text-gray-400">
-                  Active Statutory Cases
+                <span className="text-xs uppercase tracking-wider text-slate-400 font-semibold">
+                  Active Deletion Demands
                 </span>
                 <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
                   <Shield className="w-4 h-4" />
@@ -269,8 +269,8 @@ export const DashboardPage = () => {
                 <span className="font-display font-extrabold text-4xl sm:text-5xl text-emerald-400 tracking-tight">
                   {summary?.activeCases || 0}
                 </span>
-                <span className="text-xs font-mono text-gray-300 block mt-1">
-                  Dispatched under 30-day statutory SLA (DPDPA)
+                <span className="text-xs text-slate-400 block mt-1">
+                  Dispatched notices currently on 30-day response clock
                 </span>
               </div>
             </div>
@@ -279,25 +279,25 @@ export const DashboardPage = () => {
 
         {/* Exposures List Section */}
         <div className="mt-14">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/10">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
             <div>
-              <div className="section-badge mb-1">
-                DISCOVERED TARGETS
-              </div>
+              <span className="text-xs font-semibold text-blue-400 uppercase tracking-wider block mb-1">
+                Discovered Records
+              </span>
               <h3 className="font-display font-extrabold text-2xl text-white tracking-tight">
-                Identified Exposure Vectors
+                Where Your Data Was Found
               </h3>
             </div>
 
             {/* Filter Tabs & Search */}
             <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-1 bg-[#1C1E2D] p-1.5 rounded-full border border-white/10 shadow-sm">
+              <div className="flex items-center gap-1 bg-slate-900 p-1.5 rounded-full border border-white/[0.08] shadow-sm">
                 <button
                   onClick={() => setActiveTab('all')}
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
                     activeTab === 'all'
-                      ? 'bg-brand-orange text-white shadow-glow-orange-sm'
-                      : 'text-gray-300 hover:text-white'
+                      ? 'bg-blue-600 text-white shadow-glow-blue'
+                      : 'text-slate-300 hover:text-white'
                   }`}
                 >
                   All ({exposures.length})
@@ -306,8 +306,8 @@ export const DashboardPage = () => {
                   onClick={() => setActiveTab('broker')}
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
                     activeTab === 'broker'
-                      ? 'bg-brand-orange text-white shadow-glow-orange-sm'
-                      : 'text-gray-300 hover:text-white'
+                      ? 'bg-blue-600 text-white shadow-glow-blue'
+                      : 'text-slate-300 hover:text-white'
                   }`}
                 >
                   Data Brokers ({summary?.brokerCount || 0})
@@ -316,22 +316,22 @@ export const DashboardPage = () => {
                   onClick={() => setActiveTab('breach')}
                   className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
                     activeTab === 'breach'
-                      ? 'bg-brand-orange text-white shadow-glow-orange-sm'
-                      : 'text-gray-300 hover:text-white'
+                      ? 'bg-blue-600 text-white shadow-glow-blue'
+                      : 'text-slate-300 hover:text-white'
                   }`}
                 >
                   Breaches ({summary?.breachCount || 0})
                 </button>
               </div>
 
-              <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#1C1E2D] border border-white/10 shadow-sm">
-                <Search className="w-3.5 h-3.5 text-gray-400" />
+              <div className="flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-900 border border-white/[0.08] shadow-sm">
+                <Search className="w-3.5 h-3.5 text-slate-400" />
                 <input
                   type="text"
-                  placeholder="Filter entities..."
+                  placeholder="Search entities..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="bg-transparent text-xs font-mono text-white placeholder:text-gray-400 focus:outline-none w-32 sm:w-44"
+                  className="bg-transparent text-xs text-white placeholder:text-slate-400 focus:outline-none w-32 sm:w-44"
                 />
               </div>
             </div>
@@ -339,24 +339,24 @@ export const DashboardPage = () => {
 
           {/* Exposures Grid */}
           {loading ? (
-            <div className="py-24 text-center font-mono text-xs text-gray-400 flex flex-col items-center justify-center gap-3">
-              <RefreshCw className="w-6 h-6 animate-spin text-brand-orange" />
-              <span>Loading digital footprint telemetry...</span>
+            <div className="py-24 text-center text-xs text-slate-400 flex flex-col items-center justify-center gap-3">
+              <RefreshCw className="w-6 h-6 animate-spin text-blue-500" />
+              <span>Scanning databases and checking leaks...</span>
             </div>
           ) : filteredExposures.length === 0 ? (
-            <div className="novacraft-card-dark p-14 rounded-4xl text-center mt-8">
-              <Shield className="w-12 h-12 text-brand-orange mx-auto mb-4" />
+            <div className="app-card p-14 rounded-3xl text-center mt-8">
+              <Shield className="w-12 h-12 text-blue-500 mx-auto mb-4" />
               <h4 className="font-display font-bold text-white text-xl">
                 No Exposures in Current View
               </h4>
-              <p className="text-xs font-mono text-gray-300 mt-2 max-w-md mx-auto">
-                Trigger a digital footprint scan to query Have I Been Pwned and India & Global Data Broker Registries.
+              <p className="text-xs text-slate-400 mt-2 max-w-md mx-auto leading-relaxed">
+                Run a footprint scan to search Have I Been Pwned and registered data broker databases for your email and phone number.
               </p>
               <button
                 onClick={handleTriggerScan}
-                className="btn-primary-orange mt-6 text-xs font-semibold px-7 py-3 rounded-full"
+                className="btn-primary mt-6 text-xs font-semibold px-7 py-3 rounded-full"
               >
-                Run Discovery Scan
+                Scan Now
               </button>
             </div>
           ) : (

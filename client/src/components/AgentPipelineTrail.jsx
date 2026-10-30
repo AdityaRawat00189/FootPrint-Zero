@@ -93,33 +93,33 @@ export const AgentPipelineTrail = ({
   };
 
   return (
-    <div className="w-full bg-[#141419] p-8 rounded-4xl border border-white/10 relative overflow-hidden shadow-card-dark">
+    <div className="w-full bg-[#111726] p-8 rounded-3xl border border-white/[0.08] relative overflow-hidden shadow-xl">
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-8 relative z-10">
         <div>
-          <div className="section-badge mb-1">
-            LANGGRAPH MULTI-AGENT PIPELINE
+          <div className="badge-pill mb-1.5">
+            Step-by-Step Workflow
           </div>
           <h3 className="font-display font-extrabold text-2xl text-white tracking-tight">
-            Autonomous Pipeline Progress Trail
+            Automated Deletion Process
           </h3>
-          <p className="text-xs font-mono text-gray-400 mt-1">
-            State machine execution with statutory human approval gate ({legalFramework})
+          <p className="text-xs text-slate-400 mt-1">
+            Track each automated step from discovery to statutory notice delivery ({legalFramework})
           </p>
         </div>
-        <div className="text-xs font-mono px-3.5 py-1.5 rounded-full bg-brand-orange/10 border border-brand-orange/30 text-brand-orange font-bold">
-          GRAPH STATE: {caseStatus.toUpperCase()}
+        <div className="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/25 text-blue-300">
+          Current Stage: {caseStatus.replace(/_/g, ' ')}
         </div>
       </div>
 
       {/* Horizontal Trail Container */}
       <div className="relative py-4 z-10">
         {/* Background Connecting Line */}
-        <div className="hidden md:block absolute top-1/2 left-8 right-8 -translate-y-6 h-1 bg-white/10 rounded-full" />
+        <div className="hidden md:block absolute top-1/2 left-8 right-8 -translate-y-6 h-1 bg-white/[0.08] rounded-full" />
 
-        {/* Animated Active Orange Progress Line */}
+        {/* Animated Active Progress Line */}
         <motion.div
-          className="hidden md:block absolute top-1/2 left-8 -translate-y-6 h-1 bg-brand-orange shadow-glow-orange rounded-full"
+          className="hidden md:block absolute top-1/2 left-8 -translate-y-6 h-1 bg-gradient-to-r from-blue-600 to-indigo-500 shadow-glow-blue rounded-full"
           initial={{ width: '0%' }}
           animate={{
             width: `${Math.min(100, Math.max(0, (activeIndex / (PIPELINE_NODES.length - 1)) * 100))}%`,
@@ -148,36 +148,36 @@ export const AgentPipelineTrail = ({
                   setSelectedNodeIndex(selectedNodeIndex === index ? null : index);
                   if (onSelectStep) onSelectStep(node.key, nodeLog);
                 }}
-                className={`flex md:flex-col items-center gap-3.5 p-4 rounded-3xl cursor-pointer transition-all duration-300 ${
+                className={`flex md:flex-col items-center gap-3.5 p-4 rounded-2xl cursor-pointer transition-all duration-300 ${
                   selectedNodeIndex === index
-                    ? 'bg-[#24273A] border-2 border-brand-orange shadow-glow-orange'
+                    ? 'bg-slate-900 border-2 border-blue-500 shadow-glow-blue'
                     : isActive
-                    ? 'bg-[#24273A] border border-brand-orange shadow-glow-orange-sm'
+                    ? 'bg-slate-900 border border-blue-500/60 shadow-glow-blue'
                     : isCompleted
-                    ? 'bg-[#1E2132] border border-white/10 hover:border-brand-orange/40'
-                    : 'bg-[#181A28] border border-white/5 opacity-60 hover:opacity-90'
+                    ? 'bg-slate-900/80 border border-white/[0.08] hover:border-blue-500/30'
+                    : 'bg-slate-900/40 border border-white/[0.05] opacity-60 hover:opacity-90'
                 }`}
               >
                 {/* Node Icon Circle */}
                 <div
-                  className={`w-13 h-13 rounded-2xl flex items-center justify-center relative transition-transform duration-300 p-3.5 ${
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center relative transition-transform duration-300 p-3 ${
                     isPaused
-                      ? 'bg-amber-500/20 text-amber-400 border border-amber-500/50 animate-pulse'
+                      ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40 animate-pulse'
                       : isActive
-                      ? 'bg-brand-orange text-white shadow-glow-orange scale-105'
+                      ? 'bg-blue-600 text-white shadow-glow-blue scale-105'
                       : isCompleted
-                      ? 'bg-brand-orange/15 text-brand-orange border border-brand-orange/30'
-                      : 'bg-white/5 text-gray-400 border border-white/10'
+                      ? 'bg-blue-500/10 text-blue-400 border border-blue-500/25'
+                      : 'bg-white/[0.05] text-slate-400 border border-white/[0.08]'
                   }`}
                 >
                   <Icon className="w-5 h-5" />
                   {isCompleted && (
-                    <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-brand-orange text-white flex items-center justify-center shadow">
+                    <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow text-xs">
                       <CheckCircle2 className="w-3.5 h-3.5" />
                     </span>
                   )}
                   {isPaused && (
-                    <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-500 text-black flex items-center justify-center shadow font-bold text-xs">
+                    <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-500 text-slate-950 flex items-center justify-center shadow font-bold text-xs">
                       ⏸
                     </span>
                   )}
@@ -186,29 +186,29 @@ export const AgentPipelineTrail = ({
                 {/* Node Text */}
                 <div className="flex-1 md:text-center">
                   <div className="flex items-center md:justify-center gap-1.5">
-                    <span className="text-xs font-mono font-bold text-brand-orange">
+                    <span className="text-xs font-semibold text-blue-400">
                       0{index + 1}.
                     </span>
                     <span className="text-xs font-display font-bold text-white tracking-tight">
                       {node.label}
                     </span>
                   </div>
-                  <p className="text-[11px] text-gray-400 line-clamp-1 mt-0.5">
+                  <p className="text-[11px] text-slate-400 line-clamp-1 mt-0.5">
                     {node.name}
                   </p>
                   <div className="mt-2 flex items-center md:justify-center">
                     <span
-                      className={`text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full ${
+                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
                         isPaused
                           ? 'bg-amber-500/20 text-amber-300'
                           : isActive
-                          ? 'bg-brand-orange text-white font-bold'
+                          ? 'bg-blue-600 text-white font-bold'
                           : isCompleted
                           ? 'bg-emerald-500/10 text-emerald-400'
-                          : 'bg-white/5 text-gray-400'
+                          : 'bg-white/[0.05] text-slate-400'
                       }`}
                     >
-                      {isPaused ? 'PAUSED' : isActive ? 'ACTIVE' : isCompleted ? 'COMPLETED' : 'QUEUED'}
+                      {isPaused ? 'Waiting Review' : isActive ? 'Active' : isCompleted ? 'Completed' : 'Queued'}
                     </span>
                   </div>
                 </div>

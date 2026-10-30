@@ -92,58 +92,58 @@ export const CaseTrackerPage = () => {
   const daysRemaining = deadline ? Math.max(0, Math.ceil((deadline - now) / (1000 * 60 * 60 * 24))) : 45;
 
   return (
-    <div className="min-h-screen pb-24 bg-bg-base text-gray-100 selection:bg-brand-orange/30">
+    <div className="min-h-screen pb-24 bg-[#090D16] text-slate-100 selection:bg-blue-500/30 selection:text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         {/* Back Link & Breadcrumb */}
         <div className="flex items-center gap-2 mb-6">
           <button
             onClick={() => navigate('/dashboard')}
-            className="flex items-center gap-1 text-xs font-semibold text-gray-400 hover:text-white transition-colors"
+            className="flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-white transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Dashboard</span>
           </button>
-          <span className="text-gray-600 text-xs">/</span>
-          <span className="text-xs font-mono text-brand-orange">{caseRecord.caseNumber}</span>
+          <span className="text-slate-600 text-xs">/</span>
+          <span className="text-xs font-mono text-blue-400">{caseRecord.caseNumber}</span>
         </div>
 
         {/* Case Header Banner */}
-        <div className="novacraft-card-dark p-8 rounded-4xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+        <div className="app-card p-8 rounded-3xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
           <div className="flex flex-col gap-2 relative z-10">
             <div className="flex items-center gap-3">
-              <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-brand-orange text-white shadow-glow-orange-sm">
+              <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-blue-600 text-white shadow-glow-blue">
                 {caseRecord.caseNumber}
               </span>
               <StatusBadge status={caseRecord.status} />
-              <span className="text-xs font-mono text-gray-400">
-                Framework: <strong className="text-white">{caseRecord.legalFramework}</strong>
+              <span className="text-xs text-slate-400">
+                Law: <strong className="text-white">{caseRecord.legalFramework}</strong>
               </span>
             </div>
 
             <h1 className="font-display font-extrabold text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight mt-1">
-              Erasure Demand: {caseRecord.targetEntityName}
+              Data Removal Request: {caseRecord.targetEntityName}
             </h1>
-            <p className="text-xs font-mono text-gray-400 flex items-center gap-2">
-              <Mail className="w-3.5 h-3.5 text-brand-orange" />
-              <span>Recipient: {caseRecord.targetEntityEmail}</span>
+            <p className="text-xs text-slate-400 flex items-center gap-2">
+              <Mail className="w-3.5 h-3.5 text-blue-400" />
+              <span>Contact: {caseRecord.targetEntityEmail}</span>
             </p>
           </div>
 
           {/* SLA Countdown Card */}
-          <div className="bg-[#141624] border border-white/10 p-5 rounded-3xl flex items-center gap-4 min-w-[240px] relative z-10 shadow-lg">
-            <div className="w-12 h-12 rounded-2xl bg-brand-orange/15 text-brand-orange border border-brand-orange/30 flex items-center justify-center">
+          <div className="bg-slate-900 border border-white/[0.08] p-5 rounded-2xl flex items-center gap-4 min-w-[240px] relative z-10 shadow-lg">
+            <div className="w-12 h-12 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 flex items-center justify-center">
               <Clock className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[10px] font-mono text-gray-400 uppercase tracking-wider block">
-                Statutory Compliance SLA
+              <span className="text-[11px] text-slate-400 uppercase font-semibold tracking-wider block">
+                Statutory Deadline
               </span>
               <span className="font-display font-extrabold text-2xl text-white">
                 {caseRecord.status === 'pending_approval' ? 'Pending Approval' : `${daysRemaining} Days Left`}
               </span>
               {deadline && (
-                <span className="text-[10px] font-mono text-gray-400 block mt-0.5">
-                  Due: {deadline.toLocaleDateString()}
+                <span className="text-[11px] text-slate-400 block mt-0.5">
+                  Due by: {deadline.toLocaleDateString()}
                 </span>
               )}
             </div>
@@ -155,17 +155,17 @@ export const CaseTrackerPage = () => {
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`mt-6 p-4 rounded-2xl border flex items-center gap-3 text-xs font-mono ${
+            className={`mt-6 p-4 rounded-2xl border flex items-center gap-3 text-xs ${
               notification.type === 'error'
                 ? 'bg-rose-500/10 border-rose-500/20 text-rose-300'
-                : 'bg-brand-orange/15 border-brand-orange/30 text-brand-orange'
+                : 'bg-blue-500/10 border-blue-500/25 text-blue-300'
             }`}
           >
-            <Zap className="w-4 h-4 flex-shrink-0" />
-            <span className="flex-1">{notification.message}</span>
+            <Zap className="w-4 h-4 flex-shrink-0 text-blue-400" />
+            <span className="flex-1 font-medium">{notification.message}</span>
             <button
               onClick={() => setNotification(null)}
-              className="text-gray-400 hover:text-white"
+              className="text-slate-400 hover:text-white"
             >
               ✕
             </button>
@@ -184,17 +184,17 @@ export const CaseTrackerPage = () => {
         {/* Two-Column Detail Grid: Correspondence Thread & Legal Letter */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mt-8">
           {/* Outbound & Escalation Correspondence Thread */}
-          <div className="lg:col-span-6 novacraft-card-dark p-8 rounded-4xl flex flex-col justify-between">
+          <div className="lg:col-span-6 app-card p-8 rounded-3xl flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+              <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
                 <div className="flex items-center gap-2.5">
-                  <Mail className="w-4 h-4 text-brand-orange" />
+                  <Mail className="w-4 h-4 text-blue-400" />
                   <h3 className="font-display font-bold text-white text-lg">
-                    Correspondence & Dispatch Log
+                    Communication Log
                   </h3>
                 </div>
-                <span className="text-xs font-mono text-gray-400">
-                  {caseRecord.correspondence?.length || 0} Records
+                <span className="text-xs text-slate-400 font-medium">
+                  {caseRecord.correspondence?.length || 0} messages
                 </span>
               </div>
 
@@ -202,16 +202,16 @@ export const CaseTrackerPage = () => {
                 {(caseRecord.correspondence || []).map((msg, idx) => (
                   <div
                     key={idx}
-                    className="p-4 rounded-2xl bg-[#141624] border border-white/10 text-xs font-mono shadow-inner"
+                    className="p-4 rounded-2xl bg-slate-900 border border-white/[0.08] text-xs shadow-inner"
                   >
-                    <div className="flex items-center justify-between text-[10px] text-gray-400 pb-2 border-b border-white/5 mb-2.5">
-                      <span className="text-brand-orange uppercase font-bold">
-                        {msg.direction === 'outbound' ? '↗ OUTBOUND STATUTORY DISPATCH' : '↙ INBOUND COMPLIANCE'}
+                    <div className="flex items-center justify-between text-[11px] text-slate-400 pb-2 border-b border-white/[0.06] mb-2.5">
+                      <span className="text-blue-400 font-semibold">
+                        {msg.direction === 'outbound' ? 'Sent Deletion Notice' : 'Broker Response'}
                       </span>
                       <span>{new Date(msg.receivedAt).toLocaleString()}</span>
                     </div>
-                    <p className="font-bold text-gray-200 mb-1.5">{msg.subject}</p>
-                    <p className="text-xs text-gray-400 line-clamp-3 whitespace-pre-wrap leading-relaxed">
+                    <p className="font-bold text-slate-200 mb-1.5">{msg.subject}</p>
+                    <p className="text-xs text-slate-400 line-clamp-3 whitespace-pre-wrap leading-relaxed font-mono">
                       {msg.body}
                     </p>
                   </div>
@@ -220,9 +220,9 @@ export const CaseTrackerPage = () => {
             </div>
 
             {/* Manual Escalation Action */}
-            <div className="mt-6 pt-5 border-t border-white/10 flex items-center justify-between">
-              <span className="text-xs font-mono text-gray-400">
-                Escalations: <strong className="text-white">{caseRecord.followupCount || 0}</strong>
+            <div className="mt-6 pt-5 border-t border-white/[0.08] flex items-center justify-between">
+              <span className="text-xs text-slate-400">
+                Follow-ups sent: <strong className="text-white">{caseRecord.followupCount || 0}</strong>
               </span>
 
               <button
@@ -231,38 +231,38 @@ export const CaseTrackerPage = () => {
                 className="flex items-center gap-2 text-xs font-semibold text-rose-300 hover:text-white px-5 py-2.5 rounded-full bg-rose-500/10 border border-rose-500/25 hover:bg-rose-500/25 transition-all disabled:opacity-40"
               >
                 <Zap className="w-3.5 h-3.5" />
-                <span>{escalating ? 'Follow-up Agent Escalating...' : 'Trigger Follow-up Escalation'}</span>
+                <span>{escalating ? 'Sending Escalation...' : 'Send Follow-up Notice'}</span>
               </button>
             </div>
           </div>
 
           {/* Active Legal Demand Text */}
-          <div className="lg:col-span-6 novacraft-card-dark p-8 rounded-4xl flex flex-col justify-between">
+          <div className="lg:col-span-6 app-card p-8 rounded-3xl flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between pb-4 border-b border-white/10">
+              <div className="flex items-center justify-between pb-4 border-b border-white/[0.08]">
                 <div className="flex items-center gap-2.5">
-                  <FileText className="w-4 h-4 text-brand-orange" />
+                  <FileText className="w-4 h-4 text-blue-400" />
                   <h3 className="font-display font-bold text-white text-lg">
-                    Authorized Legal Demand Body
+                    Approved Legal Demand Notice
                   </h3>
                 </div>
-                <span className="text-[10px] font-mono px-3 py-1 rounded-full bg-brand-orange/10 text-brand-orange font-bold border border-brand-orange/20">
-                  RAG SYNTHESIZED
+                <span className="text-[10px] px-3 py-1 rounded-full bg-blue-500/10 text-blue-300 font-semibold border border-blue-500/20">
+                  Ready
                 </span>
               </div>
 
-              <div className="mt-5 bg-[#141624] border border-white/10 rounded-2xl p-5 max-h-[380px] overflow-y-auto font-mono text-xs text-gray-200 whitespace-pre-wrap leading-relaxed selection:bg-brand-orange/30 shadow-inner">
+              <div className="mt-5 bg-slate-900 border border-white/[0.08] rounded-2xl p-5 max-h-[380px] overflow-y-auto font-mono text-xs text-slate-200 whitespace-pre-wrap leading-relaxed selection:bg-blue-500/30 shadow-inner">
                 {caseRecord.draftedLetter?.userEditedBody || caseRecord.draftedLetter?.body || 'No letter drafted.'}
               </div>
             </div>
 
             {caseRecord.status === 'pending_approval' && (
-              <div className="mt-5 pt-4 border-t border-white/10 flex justify-end">
+              <div className="mt-5 pt-4 border-t border-white/[0.08] flex justify-end">
                 <button
                   onClick={() => navigate('/approvals')}
-                  className="btn-primary-orange flex items-center gap-2 text-xs font-semibold px-6 py-3 rounded-full"
+                  className="btn-primary flex items-center gap-2 text-xs font-semibold px-6 py-3 rounded-full"
                 >
-                  <span>Authorize in Approval Queue</span>
+                  <span>Review in Approval Queue</span>
                   <Send className="w-3.5 h-3.5" />
                 </button>
               </div>

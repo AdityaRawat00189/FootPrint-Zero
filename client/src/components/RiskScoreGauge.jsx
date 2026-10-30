@@ -27,28 +27,28 @@ export const RiskScoreGauge = ({ score = 0, size = 180, showLabel = true }) => {
 
   let colorFrom = '#10B981';
   let colorTo = '#34D399';
-  let statusText = 'SECURE / MINIMAL';
+  let statusText = 'Low Risk';
   let StatusIcon = ShieldCheck;
   let textColor = 'text-emerald-400';
 
   if (score >= 75) {
     colorFrom = '#EF4444';
     colorTo = '#F87171';
-    statusText = 'CRITICAL EXPOSURE';
+    statusText = 'High Risk';
     StatusIcon = ShieldAlert;
     textColor = 'text-rose-400';
   } else if (score >= 45) {
-    colorFrom = '#FF5B22';
-    colorTo = '#FF8A5B';
-    statusText = 'ELEVATED RISK';
-    StatusIcon = AlertTriangle;
-    textColor = 'text-brand-orange';
-  } else if (score >= 20) {
     colorFrom = '#F59E0B';
     colorTo = '#FBBF24';
-    statusText = 'MODERATE EXPOSURE';
+    statusText = 'Moderate Risk';
     StatusIcon = AlertTriangle;
     textColor = 'text-amber-400';
+  } else if (score >= 20) {
+    colorFrom = '#3B82F6';
+    colorTo = '#60A5FA';
+    statusText = 'Low Exposure';
+    StatusIcon = AlertTriangle;
+    textColor = 'text-blue-400';
   }
 
   return (
@@ -96,11 +96,11 @@ export const RiskScoreGauge = ({ score = 0, size = 180, showLabel = true }) => {
 
         {/* Center Numbers */}
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-          <span className="font-mono text-4xl font-extrabold tracking-tight text-white drop-shadow-md">
+          <span className="font-display text-4xl font-extrabold tracking-tight text-white drop-shadow-md">
             {displayValue}
           </span>
-          <span className="text-[10px] font-mono tracking-widest text-gray-400 uppercase mt-0.5">
-            / 100 RISK
+          <span className="text-[11px] font-medium tracking-wide text-slate-400 mt-0.5">
+            / 100 Risk
           </span>
         </div>
       </div>
@@ -110,7 +110,7 @@ export const RiskScoreGauge = ({ score = 0, size = 180, showLabel = true }) => {
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className={`flex items-center gap-1.5 mt-3 text-xs font-mono font-semibold tracking-wider ${textColor}`}
+          className={`flex items-center gap-1.5 mt-3 text-xs font-semibold tracking-wide ${textColor}`}
         >
           <StatusIcon className="w-3.5 h-3.5" />
           <span>{statusText}</span>

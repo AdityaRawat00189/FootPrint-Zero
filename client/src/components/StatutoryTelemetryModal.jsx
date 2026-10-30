@@ -84,21 +84,21 @@ export const StatutoryTelemetryModal = ({ isOpen, onClose }) => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
           transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="bg-[#141624] border border-brand-orange/40 rounded-3xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl relative overflow-hidden"
+          className="bg-[#0B101D] border border-blue-500/30 rounded-3xl max-w-3xl w-full max-h-[85vh] flex flex-col shadow-2xl relative overflow-hidden"
         >
           {/* Top Bar */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#1C1E2D]">
+          <div className="flex items-center justify-between px-6 py-4 border-b border-white/[0.08] bg-slate-900">
             <div className="flex items-center gap-2.5">
-              <Terminal className="w-4 h-4 text-brand-orange" />
-              <span className="font-mono text-xs font-bold text-white tracking-wider">
-                STATUTORY_RAG_MACHINE_TELEMETRY.JSON
+              <Terminal className="w-4 h-4 text-blue-400" />
+              <span className="font-mono text-xs font-semibold text-white tracking-wide">
+                agent_pipeline_specification.json
               </span>
             </div>
 
             <div className="flex items-center gap-2">
               <button
                 onClick={handleCopy}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-gray-300 hover:text-white hover:border-brand-orange/50 transition-colors"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.05] border border-white/[0.1] text-xs font-medium text-slate-300 hover:text-white hover:border-blue-500/40 transition-colors"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 <span>{copied ? 'Copied' : 'Copy Spec'}</span>
@@ -106,7 +106,7 @@ export const StatutoryTelemetryModal = ({ isOpen, onClose }) => {
 
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-full text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/[0.08] transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -114,14 +114,14 @@ export const StatutoryTelemetryModal = ({ isOpen, onClose }) => {
           </div>
 
           {/* Telemetry Code Content */}
-          <div className="p-6 overflow-y-auto font-mono text-xs text-gray-200 leading-relaxed selection:bg-brand-orange/30">
+          <div className="p-6 overflow-y-auto font-mono text-xs text-slate-300 leading-relaxed selection:bg-blue-500/30">
             <pre className="whitespace-pre-wrap">{rawTelemetry}</pre>
           </div>
 
           {/* Bottom Bar */}
-          <div className="px-6 py-3 border-t border-white/10 bg-[#10121C] flex items-center justify-between text-[11px] font-mono text-gray-400">
-            <span>LangGraph Multi-Agent Architecture · ChromaDB RAG Vector Store</span>
-            <span className="text-brand-orange font-semibold">DPDPA 2023 Statutory Schema Ready</span>
+          <div className="px-6 py-3 border-t border-white/[0.08] bg-[#070A12] flex items-center justify-between text-xs text-slate-400">
+            <span>LangGraph Multi-Agent Architecture · ChromaDB Vector Store</span>
+            <span className="text-blue-400 font-medium">DPDPA 2023 · GDPR · CCPA Compliant</span>
           </div>
         </motion.div>
       </div>

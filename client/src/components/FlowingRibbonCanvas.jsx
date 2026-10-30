@@ -82,7 +82,7 @@ export const FlowingRibbonCanvas = () => {
           ctx.lineTo(x, y);
         }
 
-        ctx.strokeStyle = i % 2 === 0 ? `rgba(255, 91, 34, ${alpha})` : `rgba(245, 158, 11, ${alpha})`;
+        ctx.strokeStyle = i % 2 === 0 ? `rgba(59, 130, 246, ${alpha})` : `rgba(6, 182, 212, ${alpha})`;
         ctx.lineWidth = 1.2;
         ctx.stroke();
       }

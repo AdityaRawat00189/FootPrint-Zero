@@ -1,18 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const LANES = [
-  { id: 'discovery', label: '01. SCAN & DISCOVERY', xRatio: 0.14 },
-  { id: 'ranking', label: '02. SENSITIVITY WEIGHTING', xRatio: 0.38 },
-  { id: 'drafting', label: '03. RAG STATUTORY CITATION', xRatio: 0.62 },
-  { id: 'dispatch', label: '04. HITL DISPATCH & SLA', xRatio: 0.86 },
+  { id: 'discovery', label: '1. Scan & Discovery', xRatio: 0.14 },
+  { id: 'ranking', label: '2. Risk Assessment', xRatio: 0.38 },
+  { id: 'drafting', label: '3. Legal Drafting', xRatio: 0.62 },
+  { id: 'dispatch', label: '4. Human Review & Send', xRatio: 0.86 },
 ];
 
 const DATA_VECTORS = [
-  { label: 'Mobile +91 98*** 4210', target: 'Truecaller India', clause: 'DPDPA 2023 § 12(1)', risk: '78/100', color: '#FF5B22' },
-  { label: 'PAN: ****741B', target: 'TransUnion CIBIL', clause: 'DPDPA 2023 § 6(4)', risk: '85/100', color: '#F59E0B' },
-  { label: 'Aadhaar e-KYC Link', target: 'Commercial Dialer', clause: 'DPDPA § 12 Erasure', risk: '92/100', color: '#EF4444' },
-  { label: 'B2B Corporate Direct', target: 'Apollo.io Inc', clause: 'GDPR Art. 17 / CCPA', risk: '64/100', color: '#06B6D4' },
-  { label: 'Home Address Tag', target: 'Justdial Ltd', clause: 'DPDPA § 12(3) Scrub', risk: '70/100', color: '#10B981' },
+  { label: 'Mobile Record', target: 'Truecaller Directory', clause: 'DPDPA 2023 § 12', risk: '78/100', color: '#3B82F6' },
+  { label: 'Tax Profile', target: 'Credit Bureau', clause: 'DPDPA 2023 § 6(4)', risk: '85/100', color: '#6366F1' },
+  { label: 'Identity Record', target: 'Commercial Dialer', clause: 'DPDPA Erasure Notice', risk: '92/100', color: '#EF4444' },
+  { label: 'Work Profile', target: 'B2B Database', clause: 'GDPR Art. 17 / CCPA', risk: '64/100', color: '#06B6D4' },
+  { label: 'Address Tag', target: 'Local Business Directory', clause: 'DPDPA Removal', risk: '70/100', color: '#10B981' },
 ];
 
 export const LivePipelineCanvas = () => {
@@ -186,19 +186,19 @@ export const LivePipelineCanvas = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative w-full h-[220px] rounded-3xl bg-[#141624] border border-white/10 overflow-hidden shadow-inner">
+    <div ref={containerRef} className="relative w-full h-[220px] rounded-3xl bg-[#0C1220] border border-white/[0.08] overflow-hidden shadow-inner">
       {/* Top Header Labels */}
-      <div className="absolute top-3 left-4 right-4 flex items-center justify-between pointer-events-none z-10 text-[10px] font-mono text-gray-400">
-        <span className="order-ticket-eyebrow">/ LIVE_AGENT_DISPATCH_MACHINE</span>
-        <span>HOVER DATA TOKEN TO INSPECT STATUTORY ROUTING</span>
+      <div className="absolute top-3 left-4 right-4 flex items-center justify-between pointer-events-none z-10 text-[11px] text-slate-400">
+        <span className="font-semibold text-blue-400">Autonomous Agent Pipeline</span>
+        <span className="hidden sm:inline">Hover over moving items to see broker & legal routing</span>
       </div>
 
       <canvas ref={canvasRef} className="w-full h-full cursor-crosshair" />
 
       {/* Lane Labels along bottom */}
-      <div className="absolute bottom-3 left-0 right-0 flex justify-around pointer-events-none z-10 px-4 text-[10px] font-mono text-gray-400">
+      <div className="absolute bottom-3 left-0 right-0 flex justify-around pointer-events-none z-10 px-4 text-[11px] text-slate-400">
         {LANES.map((l) => (
-          <span key={l.id} className="text-center font-semibold text-gray-300">
+          <span key={l.id} className="text-center font-medium text-slate-300">
             {l.label}
           </span>
         ))}
@@ -211,17 +211,17 @@ export const LivePipelineCanvas = () => {
             left: `${Math.min(Math.max(tooltipPos.x + 10, 10), 320)}px`,
             top: `${Math.max(tooltipPos.y - 80, 10)}px`,
           }}
-          className="absolute z-30 p-3 rounded-2xl bg-[#1C1E2D] border border-brand-orange/60 shadow-2xl text-xs font-mono text-white pointer-events-none min-w-[220px]"
+          className="absolute z-30 p-3 rounded-2xl bg-slate-900 border border-blue-500/50 shadow-2xl text-xs text-white pointer-events-none min-w-[220px]"
         >
-          <div className="flex items-center justify-between pb-1.5 border-b border-white/10 mb-1.5">
-            <span className="text-brand-orange font-bold text-[10px]">
-              DATA TOKEN
+          <div className="flex items-center justify-between pb-1.5 border-b border-white/[0.08] mb-1.5">
+            <span className="text-blue-400 font-bold text-[10px]">
+              DATA EXPOSURE
             </span>
-            <span className="text-[10px] text-gray-400">{hoveredParticle.risk} Risk</span>
+            <span className="text-[10px] text-slate-400">{hoveredParticle.risk} Risk</span>
           </div>
           <div className="text-white font-bold">{hoveredParticle.label}</div>
-          <div className="text-gray-300 text-[11px] mt-0.5">Target: {hoveredParticle.target}</div>
-          <div className="text-brand-orange text-[10px] mt-1 font-semibold">{hoveredParticle.clause}</div>
+          <div className="text-slate-300 text-[11px] mt-0.5">Target: {hoveredParticle.target}</div>
+          <div className="text-blue-400 text-[10px] mt-1 font-semibold">{hoveredParticle.clause}</div>
         </div>
       )}
     </div>
