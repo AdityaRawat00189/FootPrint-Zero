@@ -27,10 +27,7 @@ connectDB();
 initFollowupCron();
 
 // Middleware
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:5173',
-  credentials: true,
-}));
+app.use(cors());
 app.use(express.json());
 
 // Database readiness check middleware for API requests (excluding health check)
